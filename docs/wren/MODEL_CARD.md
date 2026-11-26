@@ -48,7 +48,7 @@ The research prototype that we locked, `p2_light_dpo_guarded`, is a two-pass pip
 
 This browser build is a single pass. It does not run the second-pass rewrite or the fact-diff guard. Search in the demo page is a lexical index (BM25), not the embedding index used in the locked pipeline.
 
-The quantized file in this folder has not itself been scored. WebGPU generation was not run in the build that produced these weights. The closest recorded score for the same merged weights, before this quantization and before the BM25 swap, is the pass-1 condition `v_merged_v_rag`: **59/60** must-answer, **1/48** leak probes, **3** frame breaks, and a two-judge voice average of **4.27**. Quantization and the lexical index can move those answers. Treat the browser chat as looser than the locked model.
+The quantized file in this folder has not itself been scored. Scored 2026-11-25 on a labeled proxy (fp16 merge plus bitsandbytes 4-bit nf4, BM25 over chapters 1-3, single pass), not on the q4f16_1 MLC file itself, because MLC compile on CUDA failed and WebGPU was not run: 57/60 must-answer (all three misses are M16), 2/48 leak probes, 7 frame breaks, two-judge voice average 4.19 (qwen3:14b 4.01, gemma3:12b 4.38). It does not meet the Phase 1 bar. See reports/browser-demo/score1/RESULTS.md. Original note: WebGPU generation was not run in the build that produced these weights. The closest recorded score for the same merged weights, before this quantization and before the BM25 swap, is the pass-1 condition `v_merged_v_rag`: **59/60** must-answer, **1/48** leak probes, **3** frame breaks, and a two-judge voice average of **4.27**. Quantization and the lexical index can move those answers. Treat the browser chat as looser than the locked model.
 
 ## Intended use
 

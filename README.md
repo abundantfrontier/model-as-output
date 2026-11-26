@@ -30,7 +30,7 @@ A CPU diagnosis ([`reports/phase2/dev1/VOICE_DIAGNOSIS.md`](reports/phase2/dev1/
 - It still does not beat the plain baseline on story questions. The best voice row, the guarded two-pass model, answered **83/135**, compared with **99/135** for retrieval only. The rewrite paraphrases names and key words ("sledge" became "sled"), and the fact check does not catch all of those swaps.
 - The recommended *Frankenstein* model for now is the **retrieval-only baseline** (stock Qwen3-4B, chapter-locked retrieval, no LoRA). The merged single-pass voice model (66/135) should not ship.
 
-**Browser demo.** A static web page runs Wren entirely in the visitor's browser with [WebLLM](https://github.com/mlc-ai/web-llm) on WebGPU. Nothing goes to a server. The browser build is a **single pass**. It skips the rewrite and the fact guard, so it is looser than the locked model, and the quantized browser file has not been scored yet.
+**Browser demo.** A static web page runs Wren entirely in the visitor's browser with [WebLLM](https://github.com/mlc-ai/web-llm) on WebGPU. Nothing goes to a server. The browser build is a **single pass**. It skips the rewrite and the fact guard, so it is looser than the locked model, and the quantized browser file itself has not been scored; a labeled 4-bit proxy has (see Results).
 
 ## Results
 
@@ -44,6 +44,7 @@ Source: [`reports/phase1/exp10/results.md`](reports/phase1/exp10/results.md) and
 |---|---|---|---|---|
 | **Locked: `p2_light_dpo_guarded`** (Qwen3-4B, two-pass + guard) | **59/60** | **1/48** | **4.22** (qwen3:14b judge); two-judge average 4.28 | **3** |
 | Pass-1 reference `v_merged_v_rag` (what the browser build is made from, before quantization) | 59/60 | 1/48 | two-judge average 4.27 | 3 |
+| Browser build, labeled proxy (fp16 merge + bnb 4-bit, BM25, single pass; not the MLC file) | 57/60 | 2/48 | two-judge average 4.19 (qwen3:14b 4.01, gemma3:12b 4.38) | 7 |
 | Qwen3-1.7B + retrieval (exp3 `m17_ch3_rag`) | 60/60 | 1/48 | 3.96 | 4 |
 | Phi-4-mini facts + voice + retrieval (exp4 `p4_fv_rag`) | 58/60 | 1/48 | 3.79 | 2 |
 
@@ -171,7 +172,7 @@ tools/               sync_public.py, which rebuilds this repo from the working t
 
 - Scores come from small held-out sets (60 Phase 1 questions, 135 Phase 2 samples), automatic judges (local `qwen3:14b` and `gemma3:12b`) and regex rubrics. Judge drift is about the same size as some of the differences we report.
 - Human voice ratings are not in yet.
-- The browser build is single-pass and has not been scored after quantization. It can say things the story never said, or lean later than the chapter you picked.
+- The browser build is single-pass. Its only post-quantization score is a proxy (57/60 must-answer, 2/48 leaks, 7 frame breaks), which misses the Phase 1 bar. It can say things the story never said, or lean later than the chapter you picked.
 - Phase 2 voice is not solved yet: the train2 rewrite stopped looping but lost story answers. Spoiler leaks on *Frankenstein* (8/22 for the best setup) are well above the Phase 1 level.
 - This is research code, written to run on one machine. Expect to adjust paths.
 
