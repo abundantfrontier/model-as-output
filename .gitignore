@@ -23,7 +23,9 @@ ndarray-cache.json
 mlc-chat-config.json
 src/browser-demo/dist/models/
 src/browser-demo/dist/vendor/
-lora_*/
+lora_*/*
+!lora_*/train_report.json
+!lora_*/adapter_config.json
 merged_*/
 checkpoint-*/
 

@@ -1,0 +1,29 @@
+{
+ "base": "Qwen/Qwen3-4B",
+ "stage": "voice",
+ "facts": "lora_facts",
+ "init": null,
+ "loss": "ce",
+ "pairs": 379,
+ "claims": 0,
+ "examples": 451,
+ "epochs": 2,
+ "lr": 0.0001,
+ "r": 16,
+ "beta": 0.1,
+ "targets": [
+  "down_proj",
+  "gate_proj",
+  "k_proj",
+  "o_proj",
+  "q_proj",
+  "up_proj",
+  "v_proj"
+ ],
+ "steps": 902,
+ "train_sec": 261,
+ "peak_vram_gb": 14.63,
+ "prefix_mismatch_skipped": 0,
+ "limit": 0,
+ "voice_choice": "one LoRA with character tag in sysprompt"
+}
