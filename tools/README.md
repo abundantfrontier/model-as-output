@@ -16,4 +16,4 @@ What it does:
 3. Scans the result for tokens and keys (Hugging Face, GitHub, OpenAI-style, xAI, AWS, private keys), home paths, e-mail addresses, IP addresses, UUIDs, tool bypass flags and host names. It exits non-zero if anything is found.
 4. Copies hand-written public files (this README, the top-level README, LICENSE, .gitignore) from `tools/public-overlay/`.
 
-A new Phase 2 run (`train2`, …) is only included once its `RESULTS.md` exists, so a running job is never copied. Publishing the staged tree to GitHub is a separate step, done through the GitHub connector after review.
+A new Phase 2 run (`train2`, `train3`, …) is only included once its `RESULTS.md` exists, so a running job is never copied. Publishing the staged tree to GitHub is a separate step, done through the GitHub connector after review.

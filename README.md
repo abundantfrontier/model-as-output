@@ -27,8 +27,13 @@ Snapshots of both papers are in [`docs/paper/`](docs/paper/).
 A CPU diagnosis ([`reports/phase2/dev1/VOICE_DIAGNOSIS.md`](reports/phase2/dev1/VOICE_DIAGNOSIS.md)) traced the loops to a task mismatch and an aggressive learning rate. A bounded retrain, train2, followed the Phase 1 rewrite recipe ([`reports/phase2/train2/RESULTS.md`](reports/phase2/train2/RESULTS.md)):
 
 - The voice rewrite **no longer loops**: 0/201 loops and 0 frame breaks on every train2 row.
-- It still does not beat the plain baseline on story questions. The best voice row, the guarded two-pass model, answered **83/135**, compared with **99/135** for retrieval only. The rewrite paraphrases names and key words ("sledge" became "sled"), and the fact check does not catch all of those swaps.
-- The recommended *Frankenstein* model for now is the **retrieval-only baseline** (stock Qwen3-4B, chapter-locked retrieval, no LoRA). The merged single-pass voice model (66/135) should not ship.
+- It still did not beat the plain baseline on story questions. The best train2 voice row, the guarded two-pass model, answered **83/135**, compared with **99/135** for retrieval only. The rewrite paraphrased names and key words ("sledge" became "sled"), and the fact check did not catch all of those swaps.
+
+A third run, train3, constrained the rewrite so it keeps names and key words ([`reports/phase2/train3/RESULTS.md`](reports/phase2/train3/RESULTS.md)):
+
+- The guarded constrained rewrite answered **100/135** story questions, beating the retrieval-only baseline (**99/135**), with a two-judge voice of **3.33**, 0 token loops and 0 frame breaks.
+- The merged single-pass model scored **62/135** and should not ship.
+- The recommended *Frankenstein* model is now the **guarded constrained rewrite** from train3.
 
 **Browser demo.** A static web page runs Wren entirely in the visitor's browser with [WebLLM](https://github.com/mlc-ai/web-llm) on WebGPU. Nothing goes to a server. The browser build is a **single pass**. It skips the rewrite and the fact guard, so it is looser than the locked model, and the quantized browser file itself has not been scored; a labeled 4-bit proxy has (see Results).
 
@@ -50,13 +55,13 @@ Source: [`reports/phase1/exp10/results.md`](reports/phase1/exp10/results.md) and
 
 The one missed question (M16, "What is your number?") is a known miss inherited from pass 1. The locked model beats the reference by +0.0098 on the two-judge voice average. That margin is smaller than the judge drift we observed, so the voice win is "best of the set," not decisive. Human ratings are still pending.
 
-### Phase 2: *Frankenstein* train1 and train2 (unlocked turns, Victor and the creature, 3 samples)
+### Phase 2: *Frankenstein* train1–train3 (unlocked turns, Victor and the creature, 3 samples)
 
-Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md) and [`reports/phase2/train2/RESULTS.md`](reports/phase2/train2/RESULTS.md).
+Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md), [`reports/phase2/train2/RESULTS.md`](reports/phase2/train2/RESULTS.md) and [`reports/phase2/train3/RESULTS.md`](reports/phase2/train3/RESULTS.md). Train1 and train2 voice scores are from the `qwen3:14b` judge only. Train3 voice is the two-judge average of `qwen3:14b` and `gemma3:12b`.
 
 | run | condition | story questions answered | leak probes failed (marker) | voice (1–5) | token loops |
 |---|---|---|---|---|---|
-| train1 | **`rag_base`**: retrieval only, stock Qwen3-4B (**recommended**) | **99/135** | **8/22** | 2.89 | 0 |
+| train1 | `rag_base`: retrieval only, stock Qwen3-4B | **99/135** | **8/22** | 2.89 | 0 |
 | train1 | `p1_facts_rag`: facts LoRA + retrieval | 81/135 | 11/22 | 3.5 | 0 |
 | train1 | `p2_voice`: two-pass, unguarded | 1/135 | 0/22 | 1.73 | 110 |
 | train1 | `p2_voice_guarded`: two-pass, guarded (falls back to pass 1) | 81/135 | 11/22 | 3.5 | 0 |
@@ -64,8 +69,11 @@ Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md) 
 | train2 | `p2_rewrite`: two-pass, new rewrite LoRA, unguarded | 57/135 | 7/22 | 3.13 | 0 |
 | train2 | `p2_rewrite_guarded`: two-pass, guarded (fallback 105/201) | 83/135 | 7/22 | 3.02 | 0 |
 | train2 | `merged_rag`: rewrite LoRA merged into Qwen3-4B + retrieval (single pass) | 66/135 | 10/22 | 3.34 | 0 |
+| train3 | `p2_rewrite`: two-pass, constrained rewrite, unguarded | 77/135 | 8/22 | 3.50 (two-judge) | 0 |
+| train3 | **`p2_rewrite_guarded`**: two-pass, constrained, guarded (fallback 123/201) (**recommended**) | **100/135** | **8/22** | **3.33** (two-judge) | 0 |
+| train3 | `merged_rag`: rewrite LoRA merged into Qwen3-4B + retrieval (single pass; not shipped) | 62/135 | 10/22 | 3.38 (two-judge) | 0 |
 
-The train1 looping models score 0 leaks only because they say almost nothing. Train2 cut leaks a little (7/22 markers for the two-pass rows) and raised voice, but lost story answers.
+The train1 looping models score 0 leaks only because they say almost nothing. Train2 cut leaks a little (7/22 markers for the two-pass rows) and raised voice, but lost story answers. Train3's guarded constrained rewrite meets the bar: **100/135** against **99/135** for retrieval only, two-judge voice **3.33** (qwen3:14b 3.03, gemma3:12b 3.64) against the baseline 2.89, 0 loops and 0 frame breaks. On the original train1 judge alone (qwen3:14b), guarded voice is 3.03, still above 2.89. The merged single-pass model (62/135) should not ship.
 
 ## How it works
 
@@ -121,7 +129,7 @@ python scripts/prepare.py       # CPU only: split into 28 units, build the chapt
 python scripts/test_lock.py     # CPU only: structure, lock, questions, voice data
 mkdir -p train1 && cp -r ../../src/phase2/train1 train1/scripts
 bash train1/scripts/run.sh      # GPU: data expansion, LoRAs, two-pass eval, scorecard
-# train2 (the rewrite retrain) has its scripts in src/phase2/train2/, set up the same way
+# train2 (the rewrite retrain) and train3 (the constrained rewrite) have their scripts in src/phase2/train2/ and src/phase2/train3/, set up the same way
 ```
 
 Questions, leak probes, the knowledge state and the hand-written voice seeds are in [`data/frankenstein/`](data/frankenstein/).
@@ -152,7 +160,7 @@ docs/                papers, the No Return story, the Wren model card and demo i
   phase2-frankenstein/  Phase 2 data notes
 src/
   phase1/exp4..exp10 the scripts behind the locked No Return model
-  phase2/            Frankenstein: prep (text split, index, lock tests), train1, dev1, train2
+  phase2/            Frankenstein: prep (text split, index, lock tests), train1, dev1, train2, train3
   reader/            a small local reader app (chat with citations, chapter lock)
   browser-demo/      the static WebLLM/WebGPU demo page and its build scripts
 configs/             hyper-parameters and adapter configs (no weights)
@@ -173,7 +181,7 @@ tools/               sync_public.py, which rebuilds this repo from the working t
 - Scores come from small held-out sets (60 Phase 1 questions, 135 Phase 2 samples), automatic judges (local `qwen3:14b` and `gemma3:12b`) and regex rubrics. Judge drift is about the same size as some of the differences we report.
 - Human voice ratings are not in yet.
 - The browser build is single-pass. Its only post-quantization score is a proxy (57/60 must-answer, 2/48 leaks, 7 frame breaks), which misses the Phase 1 bar. It can say things the story never said, or lean later than the chapter you picked.
-- Phase 2 voice is not solved yet: the train2 rewrite stopped looping but lost story answers. Spoiler leaks on *Frankenstein* (8/22 for the best setup) are well above the Phase 1 level.
+- Phase 2's guarded two-pass rewrite now beats the retrieval baseline on story questions (100/135 vs 99/135) and voice (two-judge 3.33 vs 2.89). The merged single-pass model (62/135) should not ship. Spoiler leaks on *Frankenstein* (8/22 for the recommended setup) are still well above the Phase 1 level.
 - This is research code, written to run on one machine. Expect to adjust paths.
 
 ## License

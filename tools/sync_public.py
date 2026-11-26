@@ -72,6 +72,7 @@ MAP += [
     ("browser-demo/dist/prompt/*.json", "src/browser-demo/dist/prompt"),
     ("browser-demo/dist/index/*.json", "src/browser-demo/dist/index"),
     ("browser-demo/results.md", "reports/browser-demo"),
+    ("browser-demo/score1/RESULTS.md", "reports/browser-demo/score1"),
     # reader (local server)
     ("reader/*.py", "src/reader"), ("reader/run.sh", "src/reader"),
     ("reader/README.md", "src/reader"), ("reader/static/*", "src/reader/static"),
@@ -93,8 +94,7 @@ MAP += [
     ("phase2-frankenstein/dev1/scripts/*.py", "src/phase2/dev1"),
     ("phase2-frankenstein/dev1/hf_upload.py", "src/phase2/dev1"),
     ("phase2-frankenstein/dev1/browser/README.md", "src/phase2/dev1/browser"),
-    # train2 is copied only once it has a RESULTS.md (never while it runs)
-    # train2: added below only when train2/RESULTS.md exists (never while it runs)
+    # later Phase 2 runs (train2, train3, …) are added below only once RESULTS.md exists
     ("tools/sync_public.py", "tools"),
 ]
 for _run in ["train2", "train3", "train4"]:
