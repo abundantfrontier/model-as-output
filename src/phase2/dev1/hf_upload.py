@@ -8,7 +8,7 @@ Usage:
   HF_TOKEN=... ORG=... python3 hf_upload.py --dry-run
   HF_TOKEN=... ORG=... python3 hf_upload.py          # real upload; do not run in this block
 
-Target repo: ${ORG}/wren-qwen3-4b-q4f16_1-MLC
+Target repo: AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC
 Source: ~/output-model/browser-demo/dist/models/wren-q4f16_1-MLC/
 
 If MODEL_CARD.md is present in this directory, print it as the card to attach
@@ -25,7 +25,7 @@ os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
 
 HERE = Path(__file__).resolve().parent
 SOURCE = Path.home() / "output-model" / "browser-demo" / "dist" / "models" / "wren-q4f16_1-MLC"
-REPO_NAME = "wren-qwen3-4b-q4f16_1-MLC"
+REPO_NAME = "wren-no-return-qwen3-4b-q4f16_1-MLC"
 SKIP_SUFFIX = {".lock", ".pid"}
 
 
@@ -76,6 +76,11 @@ def main() -> None:
     )
     args = ap.parse_args()
     token, org = env_or_missing()
+    if org != "AbundantFrontierInstitute":
+        fail(
+            "ORG must be AbundantFrontierInstitute. "
+            "Refusing to create or upload to any other namespace, including a personal one."
+        )
     repo_id = f"{org}/{REPO_NAME}"
     files = list_files(SOURCE)
     card = HERE / "MODEL_CARD.md"

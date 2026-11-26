@@ -9,7 +9,8 @@ We start with stories, because they make the hard parts easy to see. A reader pi
 - Lab page: <https://abundantfrontier.org/lab/>
 - Concept paper (working paper): <https://abundantfrontier.org/lab/model-as-output/concept/>
 - *No Return* technical report (working paper): <https://abundantfrontier.org/lab/model-as-output/no-return/>
-- Browser model for Wren on Hugging Face: `https://huggingface.co/HF_ORG/wren-qwen3-4b-q4f16_1-MLC`: **coming soon (link TBD)**
+- Browser model for Wren on Hugging Face: <https://huggingface.co/AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC>
+- Hugging Face collection titled “Model as output”: not created yet. Creating it needs collection-write access on the AbundantFrontierInstitute org; the current upload credential can write model repos there, but not collections.
 
 Snapshots of both papers are in [`docs/paper/`](docs/paper/).
 
@@ -134,7 +135,7 @@ python3 serve.py        # serves on 127.0.0.1 with the headers WebGPU needs
 The page also needs two things that are too big for git:
 
 - the WebLLM 0.2.87 bundle at `dist/vendor/web-llm.js` (from the [`@mlc-ai/web-llm`](https://www.npmjs.com/package/@mlc-ai/web-llm) package);
-- the model weights in `dist/models/`. For Wren: `https://huggingface.co/HF_ORG/wren-qwen3-4b-q4f16_1-MLC` (**coming soon, link TBD**), or build them yourself with `src/browser-demo/scripts/merge_voice.py` and `quantize.py`. For the plain *Frankenstein* page, use the public [`mlc-ai/Qwen3-4B-q4f16_1-MLC`](https://huggingface.co/mlc-ai/Qwen3-4B-q4f16_1-MLC), and first build its chapter-locked index and prompt files with `src/phase2/dev1/build_index.py` (they are generated from the Gutenberg text, so they are not committed).
+- the model weights in `dist/models/`. For Wren: <https://huggingface.co/AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC>, or build them yourself with `src/browser-demo/scripts/merge_voice.py` and `quantize.py`. For the plain *Frankenstein* page, use the public [`mlc-ai/Qwen3-4B-q4f16_1-MLC`](https://huggingface.co/mlc-ai/Qwen3-4B-q4f16_1-MLC), and first build its chapter-locked index and prompt files with `src/phase2/dev1/build_index.py` (they are generated from the Gutenberg text, so they are not committed).
 
 Use a current Chrome or Edge with WebGPU and about 3.5 GB of free GPU memory. See [`src/browser-demo/README.md`](src/browser-demo/README.md).
 
@@ -161,7 +162,7 @@ tools/               sync_public.py, which rebuilds this repo from the working t
 
 ## What is not in this repo
 
-- **Model weights.** No LoRA adapters, merged checkpoints or quantized shards (tens of GB). The browser weights for Wren will be published on Hugging Face at `https://huggingface.co/HF_ORG/wren-qwen3-4b-q4f16_1-MLC` (**coming soon, link TBD**).
+- **Model weights.** No LoRA adapters, merged checkpoints or quantized shards (tens of GB). The browser weights for Wren are on Hugging Face at <https://huggingface.co/AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC>.
 - **Generated training data and raw generations.** Except for the locked Phase 1 judged run, these are large and can be regenerated with the scripts.
 - **The *Frankenstein* text.** It is public domain. Download it from [Project Gutenberg #41445](https://www.gutenberg.org/ebooks/41445).
 - Logs, caches, virtual environments and machine-specific files.

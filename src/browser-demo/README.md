@@ -61,3 +61,8 @@ No new GPU eval was run. The closest recorded score for these weights, before q4
 ## Checked here
 
 `scripts/test_lock.py` passed. Headless Chromium, desktop and mobile, loaded `?selftest=1`, switched chapters, and refused to answer before Load model. Those runs did not fetch chapter 4 or 5, and they did not fetch the weights. WebGPU generation was not run.
+
+## Hugging Face-hosted weights
+
+The same quantized Wren build is published at <https://huggingface.co/AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC>. To load those weights in the browser instead of `./models/`, use `dist/app.huggingface.js` (a copy of `app.js`) or the model record in `dist/hf-model-config.js`. The default local `app.js` is unchanged and still reads the on-disk folder.
+The WebGPU wasm is the official WebLLM 0.2.87 library; the Hugging Face config points at <https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_87/base/Qwen3-4B-q4f16_1_cs1k-webgpu.wasm> rather than the local copy.

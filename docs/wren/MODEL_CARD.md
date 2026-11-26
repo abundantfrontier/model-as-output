@@ -5,6 +5,7 @@ tags:
   - mlc
   - webllm
   - webgpu
+  - model-as-output
 ---
 
 # Wren (No Return) — browser model
@@ -13,9 +14,9 @@ This is the in-browser model for Wren, a character from *No Return,* a short inv
 
 The work is part of **Stories you can step into**, a model-as-output research project by Boyd Wilson, Abundant Frontier Institute and Omnibond Systems. The Lab write-up is at [abundantfrontier.org/lab/](https://abundantfrontier.org/lab/).
 
-Hugging Face repository: `https://huggingface.co/HF_ORG/wren-qwen3-4b-q4f16_1-MLC`: **coming soon (link TBD)**. `HF_ORG` is a placeholder until the hosting organization is set.
+Hugging Face repository: [AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC](https://huggingface.co/AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC)
 
-Code, data and reports: <https://github.com/abundantfrontier/model-as-output>
+Code, data and reports: <https://github.com/abundantfrontier/model-as-output> (this GitHub repo may still be filling in).
 
 ## What you are downloading
 
@@ -24,6 +25,22 @@ A quantized [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) chat model, packed 
 On disk the weight folder is about 2.2 GB: 74 shards plus an 11 MB tokenizer. The first visit downloads that into the browser. The page asks for about 3.5 GB of GPU memory and caps the context at 4,096 tokens.
 
 The model runs on the visitor's computer. It does not need a server GPU, and the story does not leave the machine.
+
+This repository contains the quantized weights, tokenizer, `tensor-cache.json`, and `mlc-chat-config.json`. It does not include the WebGPU runtime library (`.wasm`). That file is the official WebLLM 0.2.87 library for this Qwen3-4B `q4f16_1` / `cs1k` layout. Point `model_lib` at:
+
+<https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_87/base/Qwen3-4B-q4f16_1_cs1k-webgpu.wasm>
+
+Example `model_list` entry for WebLLM 0.2.87:
+
+```js
+{
+  model: "https://huggingface.co/AbundantFrontierInstitute/wren-no-return-qwen3-4b-q4f16_1-MLC",
+  model_id: "wren-q4f16_1",
+  model_lib: "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_87/base/Qwen3-4B-q4f16_1_cs1k-webgpu.wasm",
+  overrides: { context_window_size: 4096, prefill_chunk_size: 1024 },
+  vram_required_MB: 3500,
+}
+```
 
 ## This build is looser than the locked model
 
