@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-*/
+venv/
+.env
+*.egg-info/
+
+# Model weights and large artifacts (never commit; see README)
+*.safetensors
+*.gguf
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+*.wasm
+params_shard_*
+tensor-cache.json
+ndarray-cache.json
+mlc-chat-config.json
+src/browser-demo/dist/models/
+src/browser-demo/dist/vendor/
+lora_*/
+merged_*/
+checkpoint-*/
+
+# Generated runs, data and indexes
+work/
+runs/
+logs/
+*.log
+*.pid
+*.lock
+.cache/
+hf_cache/
+
+# Frankenstein text: download from Project Gutenberg, do not commit
+pg41445.txt
+
+# OS / editors
+.DS_Store
+*.swp
+.idea/
+.vscode/

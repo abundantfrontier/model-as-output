@@ -1,0 +1,38 @@
+{
+  "story": "No Return",
+  "character": "wren",
+  "k": 6,
+  "chunk_words": 120,
+  "chapters": [
+    {
+      "n": 1,
+      "title": "Chapter 1 \u2014 To List",
+      "chunks": 9,
+      "file": "index/ch1.json"
+    },
+    {
+      "n": 2,
+      "title": "Chapter 2 \u2014 Under the Cover",
+      "chunks": 9,
+      "file": "index/ch2.json"
+    },
+    {
+      "n": 3,
+      "title": "Chapter 3 \u2014 Return Is the Correct Heading",
+      "chunks": 8,
+      "file": "index/ch3.json"
+    },
+    {
+      "n": 4,
+      "title": "Chapter 4 \u2014 Filed",
+      "chunks": 10,
+      "file": "index/ch4.json"
+    },
+    {
+      "n": 5,
+      "title": "Chapter 5 \u2014 Green Light (NON-CANON)",
+      "chunks": 7,
+      "file": "index/ch5.json"
+    }
+  ]
+}

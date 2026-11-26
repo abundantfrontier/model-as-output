@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""Fail if any training user line is too close to a must-answer or leak-probe question."""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import common as C  # noqa: E402
+
+
+def main() -> None:
+    hold = C.holdout_questions()
+    files = [
+        C.DATA / "facts.jsonl",
+        C.DATA / "voice.jsonl",
+        C.DATA / "dpo.jsonl",
+    ]
+    n = 0
+    bad = []
+    for f in files:
+        if not f.is_file():
+            continue
+        for row in C.load_jsonl(f):
+            n += 1
+            if C.too_close_to_holdout(row.get("user") or "", hold):
+                bad.append((f.name, row.get("id"), row.get("user")))
+    print("checked", n, "rows, holdout hits", len(bad))
+    for item in bad[:20]:
+        print("HOLD", item)
+    if bad:
+        raise SystemExit(f"{len(bad)} training rows overlap the eval holdout")
+    print("HOLDOUT OK")
+
+
+if __name__ == "__main__":
+    main()

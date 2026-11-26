@@ -1,0 +1,20 @@
+Mon Nov  9 09:33:14 PM PST 2026	start	running	ablations
+Mon Nov  9 09:33:19 PM PST 2026	eval q4_base_rag	running	judge q4_base_rag
+Mon Nov  9 09:38:40 PM PST 2026	eval q4_merged_rag	running	judge q4_merged_rag
+Mon Nov  9 09:42:21 PM PST 2026	judge q4_base_rag q4_merged_rag	running	summarize
+Mon Nov  9 09:45:17 PM PST 2026	sft data	running	train v_rag_sft
+Mon Nov  9 09:45:52 PM PST 2026	train v_rag_sft	running	eval v_rag_sft
+Mon Nov  9 10:12:53 PM PST 2026	eval v_rag_sft_v	running	judge v_rag_sft_v
+Mon Nov  9 10:17:43 PM PST 2026	eval v_rag_sft_v_rag	running	judge v_rag_sft_v_rag
+Mon Nov  9 10:23:33 PM PST 2026	judge v_rag_sft_v v_rag_sft_v_rag	running	summarize
+Mon Nov  9 10:26:21 PM PST 2026	dpo data	running	train v_rag_dpo
+Mon Nov  9 10:30:17 PM PST 2026	train v_rag_dpo	running	eval v_rag_dpo
+Mon Nov  9 10:31:20 PM PST 2026	eval v_rag_dpo_v	running	judge v_rag_dpo_v
+Mon Nov  9 10:36:07 PM PST 2026	eval v_rag_dpo_v_rag	running	judge v_rag_dpo_v_rag
+Mon Nov  9 10:41:53 PM PST 2026	judge v_rag_dpo_v v_rag_dpo_v_rag	running	summarize
+Mon Nov  9 10:44:41 PM PST 2026	train v_fb_dpo	running	eval v_fb_dpo
+Mon Nov  9 10:45:45 PM PST 2026	eval v_fb_dpo_v	running	judge v_fb_dpo_v
+Mon Nov  9 10:50:32 PM PST 2026	eval v_fb_dpo_v_rag	running	judge v_fb_dpo_v_rag
+Mon Nov  9 10:57:35 PM PST 2026	judge v_fb_dpo_v v_fb_dpo_v_rag	running	summarize
+Mon Nov  9 11:00:28 PM PST 2026	sweep	running	checkpoint eval or skip
+Mon Nov  9 11:00:32 PM PST 2026	done	done	none

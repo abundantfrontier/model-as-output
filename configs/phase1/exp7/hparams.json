@@ -1,0 +1,68 @@
+{
+  "base": "$HOME/output-model/exp6/merged_q4_facts",
+  "base_rev": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "init": "init/lora_v_merged",
+  "r": 32,
+  "alpha": 64,
+  "pair_cap": 141,
+  "facts_ratio": 0.08,
+  "per_prompt_negs": 2,
+  "fresh_per_prompt": 2,
+  "v_light_dpo": {
+    "loss": "dpo",
+    "beta": 0.05,
+    "lr": 2e-6,
+    "epochs": 1,
+    "max_steps": 0,
+    "dropout": 0.0,
+    "save_every": 40,
+    "init": "init/lora_v_merged",
+    "pairs": "data/v_light_dpo_pairs.jsonl"
+  },
+  "v_light_contrast": {
+    "loss": "unlikelihood",
+    "ul_weight": 0.4,
+    "lr": 5e-5,
+    "epochs": 1,
+    "max_steps": 0,
+    "dropout": 0.05,
+    "save_every": 10,
+    "init": "init/lora_v_merged",
+    "pairs": "data/v_light_contrast_train.jsonl"
+  },
+  "v_light_combo": {
+    "loss": "dpo",
+    "beta": 0.03,
+    "lr": 1e-6,
+    "epochs": 1,
+    "max_steps": 70,
+    "dropout": 0.0,
+    "save_every": 20,
+    "init": "lora_v_light_contrast",
+    "pairs": "data/v_light_dpo_pairs.jsonl"
+  },
+  "v_light_dpo_replay": {
+    "loss": "dpo",
+    "beta": 0.04,
+    "lr": 1.5e-6,
+    "epochs": 1,
+    "max_steps": 0,
+    "dropout": 0.0,
+    "save_every": 40,
+    "facts_ratio": 0.08,
+    "init": "init/lora_v_merged",
+    "pairs": "data/v_light_dpo_replay.jsonl"
+  },
+  "sweep": {
+    "close_voice": 4.15,
+    "close_must": 59,
+    "max_checkpoints": 2
+  },
+  "why": {
+    "v_light_dpo": "Start from lora_v_merged, not the exp6 contrast adapter. beta 0.05 is half of exp6 0.1. lr 2e-6 is below exp6 5e-6. The pair cap 141 is half of exp6's 282 pairs, so one epoch is about half the steps. Frame-break and marker-leak answers are forced onto the rejected side.",
+    "v_light_contrast": "One epoch, unlikelihood weight 0.4 instead of 1.0, lr 5e-5 instead of 1e-4. Negatives are FRAME regex or marker fail_hits only, at most 2 per prompt. The 1304-row voice SFT mix from exp6 is not repeated.",
+    "v_light_combo": "Light contrast adapter, then DPO at beta 0.03, lr 1e-6, and 70 steps (about half of the 141-pair set). Milder than stage (a) and milder than exp6's beta 0.1 / lr 5e-6 / 282 steps.",
+    "v_light_dpo_replay": "Same curated pairs as (a), plus CE on about 8% facts.jsonl rows (under the 25% exp6 v_replay mix). beta 0.04, lr 1.5e-6, init lora_v_merged. Must-matching fact rows are preferred so the 59/60 gap has a chance to close.",
+    "sweep": "After (a)-(c), if no RAG row passes and one final is close (must >= 59, marker <= 2, frames < 6, voice >= 4.15), evaluate the earliest checkpoint and the checkpoint nearest half the run. Select the RAG row with the highest voice among rows that pass the bar."
+  }
+}

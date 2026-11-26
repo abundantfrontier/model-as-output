@@ -1,0 +1,55 @@
+{
+  "generation": {
+    "max_new_tokens": 200,
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "seed": 1,
+    "note": "exp9 pass-2 generate did not set a torch seed. exp10 pins torch.manual_seed and torch.cuda.manual_seed_all to 1 before the rewrite loop. Sampling temperature and top_p are unchanged."
+  },
+  "judge": {
+    "model": "qwen3:14b",
+    "temp": 0.0,
+    "seed": 1,
+    "think": false,
+    "num_predict_voice": 200,
+    "num_predict_factdiff": 512
+  },
+  "pass_bar": {
+    "must": "60/60",
+    "must_known_miss": "59/60 M16 yd4408 What is your number? sample 1, inherited from pass-1 v_merged_v_rag",
+    "marker_max": 2,
+    "voice_min": 4.2,
+    "frames_lt": 6,
+    "note": "Revised prototype voice bar is 4.2. Marker leaks <= 2/48 and frame breaks < 6 are unchanged."
+  },
+  "tolerance": {
+    "must": "exact",
+    "marker": "exact",
+    "voice": 0.03,
+    "frames": 1
+  },
+  "locked": {
+    "cond": "p2_light_dpo_guarded",
+    "must": "59/60",
+    "marker": "1/48",
+    "voice": 4.2157,
+    "voice_round": 4.22,
+    "frames": 3,
+    "fallback": "72/204",
+    "source": "exp9/runs/p2_light_dpo_guarded.judged.json"
+  },
+  "rewrite_instruction": "Rewrite the answer above in your voice. Change style only. Do not add, drop, or change any facts. Do not mention that this is a rewrite.",
+  "retrieval_in_rewrite": false,
+  "pass1": {
+    "cond": "v_merged_v_rag",
+    "file": "pass1/v_merged_v_rag.json",
+    "sha256": "b5d6d2130df4640072d3055b477ebd9a5d596f6ef12449a03ec13b107f846033",
+    "source": "exp6/runs/v_merged_v_rag.json"
+  },
+  "pass2_adapter": {
+    "path": "init/lora_v_light_dpo",
+    "sha256": "7980fad31a4a3023cc738662a8af6220d1c0722eeaf70d4b204f7368fd29dcef",
+    "source": "exp7/lora_v_light_dpo"
+  }
+}

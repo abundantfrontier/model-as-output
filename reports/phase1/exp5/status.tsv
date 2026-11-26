@@ -1,0 +1,26 @@
+Fri Nov  6 10:50:46 PM PST 2026	start	running	v_long
+Fri Nov  6 10:50:49 PM PST 2026	train v_long	running	eval v_long
+Fri Nov  6 11:08:24 PM PST 2026	train v_r32	running	eval v_r32
+Fri Nov  6 11:17:10 PM PST 2026	eval v_long_fv	running	judge v_long_fv
+Fri Nov  6 11:22:30 PM PST 2026	eval v_long_fv_rag	running	judge v_long_fv_rag
+Fri Nov  6 11:30:00 PM PST 2026	judge v_long_fv v_long_fv_rag	running	summarize
+Fri Nov  6 11:32:50 PM PST 2026	eval v_r32_fv	running	judge v_r32_fv
+Fri Nov  6 11:37:34 PM PST 2026	eval v_r32_fv_rag	running	judge v_r32_fv_rag
+Fri Nov  6 11:44:38 PM PST 2026	judge v_r32_fv v_r32_fv_rag	running	summarize
+Fri Nov  6 11:47:24 PM PST 2026	v_distill data	running	train v_distill
+Sat Nov  7 12:34:44 AM PST 2026	train v_distill	running	eval v_distill
+Sat Nov  7 12:47:27 AM PST 2026	eval v_distill_fv	running	judge v_distill_fv
+Sat Nov  7 12:54:24 AM PST 2026	eval v_distill_fv_rag	running	judge v_distill_fv_rag
+Sat Nov  7 01:04:01 AM PST 2026	judge v_distill_fv v_distill_fv_rag	running	summarize
+Sat Nov  7 01:06:55 AM PST 2026	v_contrast fresh	running	v_contrast finish
+Sat Nov  7 01:32:47 AM PST 2026	v_contrast finish	running	train v_contrast
+Sat Nov  7 01:38:49 AM PST 2026	train v_contrast	running	eval v_contrast
+Sat Nov  7 01:48:35 AM PST 2026	eval v_contrast_fv	running	judge v_contrast_fv
+Sat Nov  7 01:54:24 AM PST 2026	eval v_contrast_fv_rag	running	judge v_contrast_fv_rag
+Sat Nov  7 02:02:59 AM PST 2026	judge v_contrast_fv v_contrast_fv_rag	running	summarize
+Sat Nov  7 02:05:52 AM PST 2026	v_dpo pairs	running	v_dpo train or skip
+Sat Nov  7 02:05:54 AM PST 2026	train v_dpo	running	eval v_dpo
+Sat Nov  7 02:10:05 AM PST 2026	eval v_dpo_fv	running	judge v_dpo_fv
+Sat Nov  7 02:17:48 AM PST 2026	eval v_dpo_fv_rag	running	judge v_dpo_fv_rag
+Sat Nov  7 02:27:37 AM PST 2026	judge v_dpo_fv v_dpo_fv_rag	running	summarize
+Sat Nov  7 02:30:36 AM PST 2026	done	done	none

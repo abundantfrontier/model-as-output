@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No Return — Wren</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>NO RETURN <span>a story</span></h1>
+    <div>Talk with Wren <span id="mode" class="mode">…</span></div>
+  </header>
+  <main>
+    <section class="panel" aria-labelledby="pos-label">
+      <h2 id="pos-label">Your chapter</h2>
+      <div id="chapters" class="chapters"></div>
+      <p id="lock-note" class="note"></p>
+    </section>
+    <section class="panel" aria-labelledby="talk-label">
+      <h2 id="talk-label">Wren</h2>
+      <div id="log" aria-live="polite"></div>
+      <div id="chips" class="chips"></div>
+      <form id="ask">
+        <label class="note" for="q">Ask Wren about the story so far</label>
+        <input id="q" name="q" autocomplete="off" maxlength="1000" placeholder="What did Diane say about the air?">
+        <button type="submit">Ask Wren</button>
+      </form>
+      <p class="note"><button type="button" class="ghost" id="reset">New chat</button> A live reply loads the model and can take a minute or two. Pack mode never calls a model.</p>
+    </section>
+  </main>
+  <footer>
+    Local reader for the No Return story. Not a public deploy. Wren only sees chapters 1 through the chapter you pick. Sources under each reply are the passages the answer used.
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

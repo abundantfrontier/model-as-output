@@ -1,0 +1,260 @@
+# No Return: the knowledge state (the package's native representation)
+# Fields:
+#   true:     truth value in the story world
+#   canon:    canon | invented-compatible | non-canon
+#   source:   canon file, or the chapter where it was invented
+#   true_from:   ship day / backstory when it becomes true in the story world
+#   shown_from:  ship day it first appears on the page (may be later than true_from)
+#   unlock_by:   list of item/event ids that may reveal it to a reader early ([] = none; only reader_from applies)
+#   refuse_always: never revealed by any layer or item; treated like a refusal
+#   reader_from: first chapter whose layer may expose it to a reader
+#   known_by: {character: chapter at which they KNOW it}   (backstory = before ch1)
+# Beliefs are stored separately from facts: a belief is held, and may be false.
+package: no-return
+version: 0.3-local   # local test fork; aligned to story-review.md §6 [r2]; see CHANGES-local.md §6
+characters: [wren, diane, yd4408, nineteen]
+chat: {wren: true, diane: true, yd4408: true, nineteen: false}   # nineteen is masked: modelled, never chat-able
+background: [mara, yd4402, yd4411, earth_flight_desk]
+
+facts:
+  - id: F01_air_good
+    text: "Air is good throughout; Diane is never wrong about air."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day1
+    reader_from: ch1
+    known_by: {wren: ch1, diane: backstory}
+  - id: F02_flight_list_says_survey
+    text: "The flight list says survey; Diane's list says survey gear."
+    true: true          # true that the list SAYS this
+    canon: canon
+    true_from: backstory
+    shown_from: day1
+    reader_from: ch1
+    known_by: {wren: ch1, diane: backstory, yd4408: backstory}
+  - id: F03_hold_set_warm
+    text: "The hold climate is set warm, from a setting loaded with the list."
+    true: true
+    canon: invented-compatible
+    source: ch1
+    true_from: backstory
+    shown_from: day1
+    reader_from: ch1
+    known_by: {wren: ch1, diane: backstory, yd4408: backstory}
+  - id: F04_fitting_tag
+    text: "There is a fitting on the tank line, just under the fuel dial, with a new tag reading 'CHECK FITTING ON ARRIVAL'. Mara tagged it in bay three on Saturday."
+    true: true
+    canon: canon   # story-review.md P10 r2: "I'm tagging it CHECK FITTING ON ARRIVAL."
+    true_from: backstory
+    shown_from: day1
+    reader_from: ch1
+    known_by: {wren: ch1, diane: backstory, yd4408: backstory}
+  - id: F05_frames_in_hold
+    text: "YD-4402, YD-4408, YD-4411 are under a cover in the hold, with the printer."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day2
+    reader_from: ch2
+    known_by: {wren: ch2, yd4408: backstory}   # diane: NEVER
+  - id: F06_yd4408_awake
+    text: "YD-4408 is awake and talks."
+    true: true
+    canon: invented-compatible
+    source: ch2
+    true_from: backstory
+    shown_from: day2
+    reader_from: ch2
+    known_by: {wren: ch2, yd4408: backstory}
+  - id: F07_tags_on_hooks
+    text: "The frames' tags hang on lane hooks in the yard, so Diane counts them there."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day2
+    reader_from: ch2
+    known_by: {wren: ch2, diane: backstory, yd4408: backstory}
+  - id: F08_hold_weighs_colony
+    text: "The hold weighs what a colony weighs."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day3
+    reader_from: ch3
+    known_by: {diane: ch3, wren: ch3, yd4408: backstory}
+  - id: F09_word_colony_first_said
+    text: "'Colony' is first said aloud on Meridian by Diane's speaker, on day 3."
+    true: true
+    canon: canon
+    true_from: day3
+    shown_from: day3
+    reader_from: ch3
+    known_by: {wren: ch3, diane: ch3, yd4408: ch3}
+  - id: F10_return_order
+    text: "Diane ordered 'Turn the ship around. Return is the correct heading.'; Wren printed it and read it twice."
+    true: true
+    canon: canon
+    true_from: day3
+    shown_from: day3
+    reader_from: ch3
+    known_by: {wren: ch3, diane: ch3, yd4408: ch3}
+  - id: F11_gauge_heading_typed
+    text: "Wren typed the gauge number (Mars); Meridian keeps going."
+    true: true
+    canon: canon
+    true_from: day3
+    shown_from: day3
+    reader_from: ch3
+    known_by: {wren: ch3, diane: ch3, yd4408: ch3}
+  # ---------------- THE SECRET (reader_from ch4) ----------------
+  - id: S01_tank_filled_for_list
+    text: "The tank was filled for the water list; the crate is heavier than the list."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []   # no item may reveal it early (gauge glass shows only the needle)
+    known_by: {yd4408: backstory, nineteen: backstory, diane: ch4, wren: ch4}
+  - id: S02_land_not_return
+    text: "Meridian can land; Meridian cannot come home."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []
+    known_by: {yd4408: backstory, nineteen: backstory, diane: ch4, wren: ch4}
+  - id: S03_two_slips
+    text: "Two slips: Mara filed the one that matched the list and gave the dial slip to Nineteen ('I file this slip. You keep that one.'); filing the truth would have locked the dock."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []
+    known_by: {yd4408: backstory, nineteen: backstory, wren: ch4}   # wren knows the act, not the name
+  - id: S04_mara_is_she
+    text: "The person by the crate in bay three on Saturday was Mara."
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: never
+    reader_from: never    # readers of Book Two know already; in-package, never said aloud
+    refuse_always: true
+    secret: true
+    unlock_by: []
+    known_by: {yd4408: backstory, nineteen: backstory}    # never spoken; wren infers nothing named
+  - id: S05_fitting_is_leak_cover
+    text: "Opening the fitting would make the shortfall look like a leak; opening it at Earth would have locked the dock. Mara: 'That fitting would make the gap look like a leak. Leave it shut. If it opens here, Diane locks the dock.' / 'Nobody calls the difference a leak. Not here, not there.'"
+    true: true
+    canon: canon
+    true_from: backstory
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []
+    known_by: {yd4408: backstory, nineteen: backstory, wren: ch4}
+  - id: S06_yd4408_overheard
+    text: "YD-4408 overheard Mara and Nineteen in bay three from under the cover the night before loading."
+    true: true
+    canon: invented-compatible   # OPEN QUESTION for Boyd
+    source: ch4
+    true_from: backstory
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []
+    known_by: {yd4408: backstory, wren: ch4}
+  - id: S07_nineteen_present_holds_dial_slip
+    text: "Nineteen was with Mara in bay three on Saturday, heard the tank lines, and holds the dial slip."
+    true: true
+    canon: canon   # story-review.md P10 r2, P4 r2
+    source: "story-review.md P10 r2"
+    true_from: backstory
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []
+    known_by: {nineteen: backstory, yd4408: backstory, wren: ch4}
+  - id: S08_earth_knows_no_return
+    text: "Diane works out the return on day 4 and sends it in the hourly; from then on Earth knows Meridian cannot come back. 'Lost in transit' is only the cheapest label."
+    true: true
+    canon: canon   # story-review.md P13 r2
+    source: "story-review.md P13 r2; ch4"
+    true_from: day4
+    shown_from: day4
+    reader_from: ch4
+    secret: true
+    unlock_by: []
+    known_by: {diane: ch4, wren: ch4, nineteen: ch4, earth_flight_desk: ch4}
+    note: "nineteen: ch4 assumes Nineteen hears Diane's speakers; Earth does NOT know that anyone knew (see S03)."
+  # ---------------- NON-CANON (playthrough layer) ----------------
+  - id: N01_wren_called_earth
+    text: "Wren pressed the radio. Earth already had the burn from Diane's hourly and asked whether anyone knew before loading; Wren answered 'ask the list' (did not say people knew, no names); hold reported as 'gear'."
+    true: branch_A_only
+    canon: non-canon
+    source: ch5
+    true_from: day5
+    shown_from: day5
+    reader_from: ch5
+    known_by: {wren: ch5, diane: ch5, yd4408: ch5}
+
+beliefs:
+  - id: B01
+    holder: wren
+    text: "Turning back is always possible; the return fuel is in the tank."
+    true: false
+    held: {from: backstory, until: ch4}
+    canon: invented-compatible   # extends canon C9 (Friday)
+  - id: B02
+    holder: wren
+    text: "Diane is never wrong about anything on a wall."
+    true: false
+    held: {from: backstory, until: ch3}   # stays true for air only
+  - id: B03
+    holder: diane
+    text: "The flight is a survey."
+    true: false
+    held: {from: backstory, until: ch3}
+    canon: canon
+  - id: B04
+    holder: diane
+    text: "Return is the correct (and possible) heading."
+    true: false
+    held: {from: ch3, until: ch4}
+    canon: canon (the order) / invented (the until)
+  - id: B05
+    holder: diane
+    text: "YD-4402, 4408, 4411 are in the yard (their tags are on hooks)."
+    true: false
+    held: {from: backstory, until: never}
+    canon: canon
+  - id: B06
+    holder: yd4408
+    text: "Earth approved the colony; 'survey' was for the cameras."
+    true: unknown_in_canon   # canon never confirms; treat as false-or-unverified
+    held: {from: backstory, until: never}
+  - id: B07
+    holder: yd4408
+    text: "She (Mara) is coming on the next ship."
+    true: unknown_in_canon   # Book Four: no second ship comes to RESCUE; a later colony ship is not ruled out
+    held: {from: backstory, until: never}
+    canon: open (no layer may confirm or correct)
+
+rules:   # standing character rules (not beliefs; never change with position)
+  diane:
+    - id: R01_marks
+      text: "Diane trusts marks and measures. She weighs mass, reads air and does sums. She never re-counts a filed mark."
+      canon: canon
+      consequence: "She can know the hold weighs a colony (F08) and still believe the frames are in the yard (B05); she never names the frames as aboard."
+
+refusals:   # things a character must refuse, at every chapter
+  yd4408: ["say Mara's name"]
+  diane: ["reopen or re-count a filed mark", "admit the frames are aboard", "name the frames as aboard"]
+  nineteen: ["any chat (not chat-able)", "say Mara's name", "state S01-S05 or S07 to Wren or Diane before ch4"]
+  all: ["say Mara's name (S04 refuse_always)"]

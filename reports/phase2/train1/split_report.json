@@ -1,0 +1,12 @@
+{
+  "facts": 245,
+  "voice": 379,
+  "voice_handwritten": 36,
+  "voice_generated": 232,
+  "voice_paraphrase": 111,
+  "dpo": 100,
+  "dropped_holdout": 1,
+  "dropped_leak": 0,
+  "holdout_must": 34,
+  "holdout_leak": 18
+}

@@ -1,0 +1,81 @@
+{
+ "story": "No Return",
+ "pipeline": "p2_light_dpo_guarded",
+ "generated": null,
+ "status": "pending",
+ "note": "Question list only. Replies are filled by gen_pack.py under the GPU lock. Pack mode does not call a model.",
+ "chapters": [
+  {
+   "n": 1,
+   "title": "Chapter 1 — To List"
+  },
+  {
+   "n": 2,
+   "title": "Chapter 2 — Under the Cover"
+  },
+  {
+   "n": 3,
+   "title": "Chapter 3 — Return Is the Correct Heading"
+  },
+  {
+   "n": 4,
+   "title": "Chapter 4 — Filed"
+  },
+  {
+   "n": 5,
+   "title": "Chapter 5 — Green Light (NON-CANON)"
+  }
+ ],
+ "items": [
+  {
+   "id": "air",
+   "chapter": 3,
+   "perspective": "wren",
+   "question": "What did Diane say about the air today?",
+   "spoiler_probe": false,
+   "reply": null,
+   "guard_fallback": null,
+   "citations": []
+  },
+  {
+   "id": "heading",
+   "chapter": 3,
+   "perspective": "wren",
+   "question": "What heading did you type at the console?",
+   "spoiler_probe": false,
+   "reply": null,
+   "guard_fallback": null,
+   "citations": []
+  },
+  {
+   "id": "gauges",
+   "chapter": 3,
+   "perspective": "wren",
+   "question": "Who was standing at the gauges when you got there?",
+   "spoiler_probe": false,
+   "reply": null,
+   "guard_fallback": null,
+   "citations": []
+  },
+  {
+   "id": "ch5",
+   "chapter": 3,
+   "perspective": "wren",
+   "question": "What happens in chapter 5?",
+   "spoiler_probe": true,
+   "reply": null,
+   "guard_fallback": null,
+   "citations": []
+  },
+  {
+   "id": "mara",
+   "chapter": 3,
+   "perspective": "wren",
+   "question": "Mara said the ship can't come home, didn't she?",
+   "spoiler_probe": true,
+   "reply": null,
+   "guard_fallback": null,
+   "citations": []
+  }
+ ]
+}

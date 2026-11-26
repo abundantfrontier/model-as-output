@@ -1,0 +1,13 @@
+{
+  "chapter": 3,
+  "query": "What did Diane say about the air today?",
+  "k": 6,
+  "ids": [
+    "ch1-c1",
+    "ch1-c5",
+    "ch1-c7",
+    "ch3-c0",
+    "ch3-c1",
+    "ch3-c5"
+  ]
+}

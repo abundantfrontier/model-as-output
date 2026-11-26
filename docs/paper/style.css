@@ -1,0 +1,124 @@
+/* Shared styles for the "Model as Output" draft pages.
+   Conventions follow abundantfrontier.org: stone-50 page, white cards, emerald-800 accent,
+   gold (#c9a227) highlight, Crimson Pro headings + Inter body. No web fonts are loaded:
+   the stacks fall back to system fonts so the page makes no external requests. */
+:root{
+  --bg:#fafaf9; --card:#ffffff; --ink:#1c1917; --ink2:#44403c; --muted:#78716c; --line:#e7e5e4;
+  --em:#065f46; --em-d:#064e3b; --em-l:#d1fae5; --em-50:#ecfdf5; --gold:#c9a227;
+  --warn-bg:#fffbeb; --warn-line:#fcd34d; --warn-ink:#78350f;
+  --ok:#047857; --bad:#b91c1c; --okbg:#ecfdf5; --badbg:#fef2f2;
+  --serif:'Crimson Pro','Iowan Old Style',Georgia,'Times New Roman',serif;
+  --sans:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7}
+a{color:var(--em);text-decoration:underline;text-decoration-color:#a7f3d0;text-underline-offset:2px}
+a:hover{color:var(--em-d);text-decoration-color:var(--em)}
+strong{font-weight:600;color:var(--ink)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:#f5f5f4;padding:.08em .35em;border-radius:4px;border:1px solid var(--line)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1100px;margin:0 auto;padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink);font-weight:600;letter-spacing:-.01em}
+.brand span.e{font-size:1.5rem}
+.nav-links{display:flex;gap:1.4rem;font-size:.9rem;font-weight:500;align-items:center;flex-wrap:wrap}
+.nav-links a{color:var(--ink2);text-decoration:none}
+.nav-links a:hover,.nav-links a.cur{color:var(--em)}
+.nav-links a.cur{border-bottom:2px solid var(--em)}
+.badge{background:var(--em-50);border:1px solid #a7f3d0;color:var(--em);border-radius:999px;padding:.1rem .7rem;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+/* page */
+.page{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.col{max-width:52rem}
+header.title{padding:2rem 0 1.5rem;border-bottom:1px solid var(--line);margin-bottom:2rem}
+.kicker{color:var(--em);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--ink);line-height:1.2}
+h1{font-size:clamp(2.1rem,5vw,3.3rem);font-weight:600;letter-spacing:-.02em;margin:.5rem 0 1rem;max-width:20em}
+h2{font-size:2rem;font-weight:600;margin:3.2rem 0 1rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+h3{font-size:1.4rem;font-weight:600;margin:2rem 0 .5rem;color:var(--em-d)}
+h4{font-size:1.1rem;font-weight:600;margin:1.4rem 0 .3rem}
+h2 .n,h3 .n{color:var(--gold);margin-right:.5rem}
+.byline{color:var(--ink2);font-size:1rem}
+.meta{color:var(--muted);font-size:.9rem}
+.sub{font-family:var(--serif);font-size:1.35rem;color:var(--ink2);max-width:36em;margin:0 0 1rem;line-height:1.45}
+p{margin:.8rem 0}
+ul,ol{margin:.6rem 0 .9rem;padding-left:1.4rem}
+li{margin:.3rem 0}
+
+.draftbar{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;padding:.8rem 1rem;color:var(--warn-ink);font-size:.93rem;margin:0 0 1.5rem}
+.draftbar b{font-weight:700}
+.abstract{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--em);border-radius:12px;padding:1.2rem 1.4rem;margin:1.5rem 0;font-size:1rem}
+.abstract h2{all:unset;display:block;font-family:var(--serif);font-weight:600;font-size:1.25rem;margin-bottom:.4rem;color:var(--em-d)}
+.callout{background:var(--em-50);border:1px solid #a7f3d0;border-radius:14px;padding:1rem 1.3rem;margin:1.5rem 0;color:#064e3b}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:1rem 0}
+.grid .card{margin:0}
+.grid h4{margin-top:0;color:var(--em-d)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--em);background:var(--em-50);border:1px solid #a7f3d0;border-radius:999px;padding:0 .55rem;margin-right:.3rem;vertical-align:.1em}
+.tag.plan{color:#92400e;background:var(--warn-bg);border-color:var(--warn-line)}
+.tag.run{color:#1e40af;background:#eff6ff;border-color:#bfdbfe}
+
+/* toc */
+.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.3rem;margin:1.5rem 0;font-size:.95rem;columns:2;column-gap:2rem}
+@media(max-width:700px){.toc{columns:1}}
+.toc ol{list-style:none;padding:0;margin:0}.toc li{margin:.15rem 0;break-inside:avoid}
+.toc .n{color:var(--gold);font-weight:600;margin-right:.4rem}
+.toc-title{font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+
+/* tables */
+.tw{overflow-x:auto;margin:1rem 0;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.4}
+th,td{padding:.45rem .7rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f5f5f4;font-weight:600;color:var(--ink2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.ok{color:var(--ok);background:var(--okbg);font-weight:600}
+td.bad{color:var(--bad)}
+tr.ref td{background:#fafaf9;color:var(--muted);font-style:italic}
+tr.best td{background:#fffdf0}
+td.cond{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;white-space:nowrap}
+caption{caption-side:top;text-align:left;padding:.6rem .7rem;font-weight:600;color:var(--ink2);font-size:.9rem}
+figure{margin:1.6rem 0}
+figure svg{max-width:100%;height:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:.4rem}
+.small{font-size:.88rem;color:var(--ink2)}
+.refs{font-size:.92rem}
+.refs li{margin:.5rem 0}
+details{margin:1rem 0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.6rem 1rem}
+summary{cursor:pointer;font-weight:600;color:var(--ink2)}
+footer{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+.crosslink{display:block;background:var(--em-50);border:1px solid #a7f3d0;border-radius:12px;padding:.8rem 1.1rem;margin:1.2rem 0;text-decoration:none;color:var(--em-d)}
+.crosslink:hover{background:var(--em-l)}
+.crosslink b{display:block}
+@media print{.nav{position:static}body{background:#fff;font-size:11pt}.page{padding:0}details{display:block}h2{break-after:avoid}table,figure{break-inside:avoid}}
+
+/* concept paper, draft 3: destination, layers and roadmap */
+h2.first{border-top:0;margin-top:2.4rem;padding-top:0}
+.lead{font-family:var(--serif);font-size:1.45rem;line-height:1.45;color:var(--ink2);max-width:34em;margin:.4rem 0 1rem}
+.endstate svg{width:100%;height:auto}
+.layers{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:1rem 0}
+.layer{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--em);border-radius:14px;padding:1rem 1.2rem}
+.layer-b{border-top-color:var(--gold)}.layer-c{border-top-color:#60a5fa}
+.layer-k{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.layer h4{margin:.4rem 0 .3rem;color:var(--em-d)}
+.layer ul{padding-left:1.1rem;font-size:.95rem}.layer p{font-size:.92rem;margin:.5rem 0 0}
+.roadmap{list-style:none;padding:0;margin:1.2rem 0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.roadmap li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem 1rem;margin:0}
+.roadmap li.here{border:2px solid var(--em);background:var(--em-50);padding-top:1.6rem}
+.rm-flag{position:absolute;top:-.8rem;left:1rem;background:var(--em);color:#fff;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .75rem}
+.rm-n{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.roadmap h4{margin:.3rem 0 .3rem}.roadmap p{font-size:.93rem;margin:.4rem 0 0}
+.band{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .9rem;margin:3.4rem 0 0;padding:.8rem 1.1rem;border-radius:14px;background:var(--em-50);border:1px solid #a7f3d0;border-left:6px solid var(--em)}
+.band.b{background:var(--warn-bg);border-color:var(--warn-line);border-left-color:var(--gold)}
+.band.c{background:#eff6ff;border-color:#bfdbfe;border-left-color:#60a5fa}
+.band-k{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.band-t{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--ink)}
+.band-s{font-size:.9rem;color:var(--ink2);flex-basis:100%}
+.band + h2{margin-top:1.2rem;border-top:0}
+.cite-ref{border-left:3px solid var(--line,#d6d3d1);padding:.4rem 0 .4rem 1rem;margin:1rem 0;line-height:1.55}
+.cite-ref a{word-break:break-all}
+.cite-bib{background:#f5f5f4;border:1px solid #e7e5e4;border-radius:10px;padding:.8rem 1rem;overflow-x:auto;font-size:.82rem;line-height:1.45;white-space:pre}
+.cite-bib code{background:none;border:0;padding:0;font-size:inherit;color:inherit}

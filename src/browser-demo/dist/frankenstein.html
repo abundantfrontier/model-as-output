@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frankenstein — facts+RAG fallback</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .chars { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .chars button { font: 15px/1.3 ui-sans-serif, system-ui, sans-serif; background: #21262d; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+    .chars button.on, .chars button:hover { background: var(--accent); border-color: var(--accent); }
+    .chapters { max-height: 9.5rem; overflow: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FRANKENSTEIN <span>1818 · facts+RAG, no voice LoRA</span></h1>
+    <div>Talk with Victor or the creature <span id="mode" class="mode">stock Qwen3-4B</span></div>
+  </header>
+  <main>
+    <p class="intro">Mary Shelley’s Frankenstein, 1818 text. Pick how far you have read, then pick Victor or the creature. Retrieval uses only units at or before that position. Victor has no lines before Volume I, Letter IV (pos 4). The creature has none before Volume II, Chapter II (pos 13). Those lock lines are the whole reply; the model is not called. This page is the RAG-only baseline plus knowledge-state facts. It does not load Wren’s voice LoRA. The Wren demo stays at <a href="index.html">index.html</a>.</p>
+    <section class="panel" aria-labelledby="pos-label">
+      <h2 id="pos-label">Your place in the book</h2>
+      <div id="chapters" class="chapters"></div>
+      <p id="lock-note" class="note"></p>
+    </section>
+    <section class="panel" aria-labelledby="char-label">
+      <h2 id="char-label">Speaker</h2>
+      <div id="chars" class="chars"></div>
+    </section>
+    <section class="panel" aria-labelledby="talk-label">
+      <h2 id="talk-label">Victor</h2>
+      <p id="status" class="note">Stock Qwen3-4B q4f16_1 MLC. Put the official <code>mlc-ai/Qwen3-4B-q4f16_1-MLC</code> weights in <code>models/Qwen3-4B-q4f16_1-MLC/</code> (this folder). Reuses <code>models/Qwen3-4B-q4f16_1_cs1k-webgpu.wasm</code>. This page does not download the 2.2 GB pack.</p>
+      <div id="log" aria-live="polite"></div>
+      <div id="chips" class="chips"></div>
+      <form id="ask">
+        <label class="note" for="q">Ask about the story so far</label>
+        <input id="q" name="q" autocomplete="off" maxlength="1000" placeholder="What do Walton and the crew see on the ice?">
+        <button type="submit" id="send">Ask</button>
+        <button type="button" class="ghost" id="load">Load model</button>
+      </form>
+      <p class="note"><button type="button" class="ghost" id="reset">New chat</button> One reply from the pages you picked. This page does not call a server model.</p>
+    </section>
+    <p id="selftest" class="selftest" hidden></p>
+  </main>
+  <footer>
+    Local facts+RAG fallback for Frankenstein 1818. Not a public deploy. Stock Qwen3-4B, no voice LoRA. Later units are not fetched and are not put in the prompt. Wren remains the default at index.html.
+  </footer>
+  <script>
+    window.FRANKENSTEIN = {
+      index: "frankenstein-index/",
+      prompt: "frankenstein-prompt/",
+      model: "models/Qwen3-4B-q4f16_1-MLC/",
+      wasm: "models/Qwen3-4B-q4f16_1_cs1k-webgpu.wasm",
+      vendor: "./vendor/web-llm.js",
+    };
+  </script>
+  <script type="module" src="frankenstein.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No Return — Wren</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>NO RETURN <span>a short invented story</span></h1>
+    <div>Talk with Wren <span id="mode" class="mode">in this browser</span></div>
+  </header>
+  <main>
+    <p class="intro">No Return is a short invented story. Wren is the night-watch officer on the ship Meridian. Pick how far you have read. Wren's answers and the passages under them use only chapters 1 through that chapter.</p>
+    <section class="panel" aria-labelledby="pos-label">
+      <h2 id="pos-label">Your chapter</h2>
+      <div id="chapters" class="chapters"></div>
+      <p id="lock-note" class="note"></p>
+    </section>
+    <section class="panel" aria-labelledby="talk-label">
+      <h2 id="talk-label">Wren</h2>
+      <p id="status" class="note">The model stays on disk until you load it. Loading reads about 2.2 GB into this browser.</p>
+      <div id="log" aria-live="polite"></div>
+      <div id="chips" class="chips"></div>
+      <form id="ask">
+        <label class="note" for="q">Ask Wren about the story so far</label>
+        <input id="q" name="q" autocomplete="off" maxlength="1000" placeholder="What did Diane say about the air?">
+        <button type="submit" id="send">Ask Wren</button>
+        <button type="button" class="ghost" id="load">Load model</button>
+      </form>
+      <p class="note"><button type="button" class="ghost" id="reset">New chat</button> One reply, in Wren's voice, from the chapters you picked. This page does not call a server model.</p>
+    </section>
+    <p id="selftest" class="selftest" hidden></p>
+  </main>
+  <footer>
+    Local browser demo for No Return. Not a public deploy. The weights run here, on WebGPU. Later chapters are not fetched and are not put in the prompt. This page is the pass-1 voice model with a chapter-locked search. It does not run the second-pass rewrite.
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

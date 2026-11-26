@@ -1,0 +1,32 @@
+{
+  "rewrite": {
+    "epochs": 1,
+    "lr": 2e-5,
+    "r": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "loss": "ce",
+    "init": "init/lora_v_fb_dpo",
+    "pair_cap": 500,
+    "facts_twin_repeat": 3,
+    "note": "save_every is max(40, n//3) at train time so the run keeps two intermediate checkpoints. Loss is the local CE in exp8/train8.py. r/alpha stay on the init adapter (r=32, alpha=64)."
+  },
+  "close": {
+    "must_min": 59,
+    "marker_max": 2,
+    "frames_lt": 6,
+    "voice_min": 4.2,
+    "note": "Train (c) only if some unguarded or guarded two-pass row meets all of these."
+  },
+  "sweep": {
+    "must": 60,
+    "marker_max": 2,
+    "frames_lt": 6,
+    "voice_min": 4.25,
+    "note": "Sweep (d) only if some scored two-pass row is otherwise passing and voice is within 0.05 of 4.3, and only on checkpoints of the (c) run."
+  },
+  "second_source": {
+    "must_at_or_below": 57,
+    "note": "Run q4_merged_rag pass-1 on the strongest primary adapter only if every primary rewrite is at or below this must-answer count. Pass-1 v_merged_v_rag is 59/60 and q4_merged_rag is 58/60, so a rewrite that stays at 58 or 59 does not get a second source."
+  }
+}

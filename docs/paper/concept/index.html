@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model as Output: concept paper (working paper) · Abundant Frontier Institute</title>
+
+<meta name="citation_title" content="Model as Output: research you can talk to, not just read">
+<meta name="citation_author" content="Wilson, Boyd">
+<meta name="citation_publication_date" content="2026/11/11">
+<meta name="citation_technical_report_institution" content="Abundant Frontier Institute">
+<meta name="citation_technical_report_number" content="Draft 3">
+<meta name="citation_public_url" content="https://abundantfrontier.org/lab/model-as-output/concept/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="https://abundantfrontier.org/"><span class="e">🌾</span><span>Abundant Frontier Institute</span></a>
+<div class="nav-links"><a href="/lab/">Lab</a><a href="../concept/index.html" class="cur">Concept paper</a><a href="../no-return/index.html" >Experiment report</a><span class="badge">Working paper</span></div>
+</div></nav>
+<main class="page">
+<header class="title">
+<div class="kicker">Concept paper</div>
+<h1>Model as Output: research you can talk to, not just read</h1>
+<p class="sub">A researcher publishes a curated dataset plus an interaction spec. Readers then talk to the work as a novice, a reviewer, a skeptic, or one of its characters. This paper states that goal, lists the open problems on the way, and describes the approaches we are testing. They are one way in, not a proposed solution.</p>
+<p class="byline"><strong>Boyd Wilson</strong>, Abundant Frontier Institute and Omnibond Systems</p>
+<p class="meta">Draft 3 · 11 November 2026 · First test: the <a href="../no-return/index.html">technical report</a> on &ldquo;<em>No Return</em>,&rdquo; a short invented story</p>
+</header>
+
+<div class="draftbar"><b>Working paper.</b> You may cite it; see <a href="#cite">How to cite</a>. This page condenses the author's internal concept-paper drafts (1 to 4.1, 29 to 31 October 2026) and the experiments so far. Draft 3 (11 November 2026) is reorganized to lead with the destination and to separate three layers: the goal, the open problems and the approaches being tested. Sections marked <span class="tag plan">planned</span> describe intent, not results. Nothing here has been published as a finished paper.</div>
+
+<h2 class="first" id="destination">Where this is going</h2>
+<div class="hero">
+<p class="lead">Imagine a researcher finishing a dissertation. Instead of only a PDF, she publishes the work itself: a curated dataset and an interaction spec that says how readers may engage with it. Readers can then ask the work questions, in their own words, from their own seat.</p>
+<figure class="endstate">
+<svg viewBox="0 0 760 330" role="img" aria-labelledby="es-t es-d" xmlns="http://www.w3.org/2000/svg">
+<title id="es-t">The end state</title>
+<desc id="es-d">A researcher publishes a package of curated data and an interaction spec. Four readers talk to it: a novice, a reviewer, a skeptic, and a character.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#065f46"/></marker></defs>
+<g font-family="Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="14">
+<rect x="10" y="115" width="150" height="100" rx="14" fill="#ffffff" stroke="#e7e5e4"/>
+<text x="85" y="150" text-anchor="middle" font-weight="600" fill="#1c1917">The researcher</text>
+<text x="85" y="172" text-anchor="middle" fill="#44403c">writes and curates</text>
+<text x="85" y="192" text-anchor="middle" fill="#44403c">the work</text>
+<path d="M162 165H232" stroke="#065f46" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="197" y="152" text-anchor="middle" font-size="12" fill="#78716c">publishes</text>
+<rect x="236" y="85" width="210" height="160" rx="16" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+<text x="341" y="115" text-anchor="middle" font-weight="700" fill="#064e3b">The published work</text>
+<rect x="256" y="130" width="170" height="40" rx="9" fill="#ffffff" stroke="#a7f3d0"/>
+<text x="341" y="155" text-anchor="middle" fill="#064e3b">Curated dataset</text>
+<text x="341" y="184" text-anchor="middle" font-size="18" fill="#c9a227" font-weight="700">+</text>
+<rect x="256" y="192" width="170" height="40" rx="9" fill="#ffffff" stroke="#a7f3d0"/>
+<text x="341" y="217" text-anchor="middle" fill="#064e3b">Interaction spec</text>
+<path d="M448 165H518" stroke="#065f46" stroke-width="2.5" marker-end="url(#ar)" marker-start="url(#ar)"/>
+<text x="483" y="152" text-anchor="middle" font-size="12" fill="#78716c">talk to it</text>
+<g>
+<rect x="522" y="20" width="228" height="56" rx="12" fill="#ffffff" stroke="#e7e5e4"/>
+<text x="540" y="44" font-weight="600" fill="#1c1917">A novice</text><text x="540" y="64" font-size="12.5" fill="#44403c">&ldquo;What is this about?&rdquo;</text>
+<rect x="522" y="94" width="228" height="56" rx="12" fill="#ffffff" stroke="#e7e5e4"/>
+<text x="540" y="118" font-weight="600" fill="#1c1917">A reviewer</text><text x="540" y="138" font-size="12.5" fill="#44403c">&ldquo;Why was site 7 excluded?&rdquo;</text>
+<rect x="522" y="168" width="228" height="56" rx="12" fill="#ffffff" stroke="#e7e5e4"/>
+<text x="540" y="192" font-weight="600" fill="#1c1917">A skeptic</text><text x="540" y="212" font-size="12.5" fill="#44403c">&ldquo;What would prove you wrong?&rdquo;</text>
+<rect x="522" y="242" width="228" height="56" rx="12" fill="#ffffff" stroke="#e7e5e4"/>
+<text x="540" y="266" font-weight="600" fill="#1c1917">A character</text><text x="540" y="286" font-size="12.5" fill="#44403c">&ldquo;Tell me what you saw that night.&rdquo;</text>
+</g>
+</g>
+</svg>
+<figcaption>The end state. The published work, not any particular model, is the thing that is cited, reviewed and archived. Models only help readers interact with it.</figcaption>
+</figure>
+<div class="callout"><p><strong>A short example.</strong> A reader asks a published thesis on coastal soil restoration: &ldquo;Why did you leave out site 7?&rdquo; The answer is the author's own recorded reason, with a pointer to the exact record it came from, and it is marked as generated. If the author never made a claim, the reader is told so rather than handed a guess. The same idea works for fiction. Our first test is &ldquo;<em>No Return</em>,&rdquo; a short invented story: a reader partway through can talk to a character who knows only what has happened so far.</p></div>
+</div>
+
+<h2 class="first" id="layers">Three layers: goal, problems, approaches</h2>
+<p>To keep the picture honest, this paper separates what is fixed from what is still being worked out.</p>
+<div class="layers">
+<div class="layer layer-a"><div class="layer-k">A &middot; The goal <span class="tag">fixed</span></div><h4>Research output you can interact with, not a static document</h4><p>The published thing is the work itself, readable from many seats, citable, and reviewable. This does not change if our methods do. <a href="#s1">Details in §1</a> and <a href="#s2">§2</a>.</p></div>
+<div class="layer layer-b"><div class="layer-k">B &middot; Open problems <span class="tag plan">open</span></div><h4>What stands in the way</h4><ul><li>Fidelity, and making no claims the authors never made</li><li>Citation and review</li><li>Versioning</li><li>Multi-author provenance</li><li>Archival</li></ul><p><a href="#s3">Details in §3</a> and <a href="#s4">§4</a>.</p></div>
+<div class="layer layer-c"><div class="layer-k">C &middot; Approaches being tested <span class="tag run">testing</span></div><h4>One way in, not the proposal</h4><ul><li><em>No Return</em>, a story-sized test of position-locked chat</li><li>A small-model stack: LoRA adapters plus retrieval (RAG)</li><li>Judges that grade fidelity</li></ul><p><a href="#s5">Details in §5</a> to <a href="#s7">§7</a>.</p></div>
+</div>
+
+<h2 class="first" id="roadmap">Roadmap</h2>
+<p>Three phases, from a small proof to real use. Each is judged by a published test suite, not a demo.</p>
+<ol class="roadmap">
+<li class="here"><div class="rm-flag">You are here</div><div class="rm-n">Phase 1</div><h4>A small model holds one story faithfully</h4><p>Can a small model act as if it knows only the part of a story the reader has reached? We are testing this with <em>No Return</em>. The locked version passes a relative bar, but only narrowly, and human ratings are pending (<a href="#s7">§7</a>).</p></li>
+<li><div class="rm-n">Phase 2</div><h4>A real paper</h4><p>Publish one real research paper as a package, reviewed and signed off by its own authors.</p></li>
+<li><div class="rm-n">Phase 3</div><h4>A thesis or multi-author collaboration</h4><p>Extend to a full thesis or a work with several authors, each part carrying its own provenance and review. The finer technical steps behind these phases are in <a href="#s6">§6</a>.</p></li>
+</ol>
+
+<div class="abstract"><h2>Abstract</h2>
+<p>Dissertations, research programs, courses and novels are published as documents, but a document is only one rendering of what an author knows. Our goal is research output you can interact with: the work published as a <em>package</em> of curated data (frozen canon with stable identifiers, a knowledge state recording what is true and who knows it, visual and audio canon, a fidelity test suite and build recipes) plus an <em>interaction spec</em> that lists how the work may be experienced. We state the open problems on the way: fidelity to a frozen core, citation and review, versioning, multi-author provenance and archival durability. We then describe the approaches we are testing, which are one way in and not a proposed solution: a compiler that builds readings, chat and later voice and images from the package; a small-model stack of LoRA adapters plus retrieval; and judges and test suites that grade fidelity. The first test is <em>No Return</em>, a short invented story, reported separately.</p></div>
+
+<nav class="toc" aria-label="Contents"><div class="toc-title">Contents</div><ol>
+<li><span class="n"></span><strong>Layer A: the goal</strong></li>
+<li><a href="#s1"><span class="n">1</span>The goal in detail</a></li>
+<li><a href="#s2"><span class="n">2</span>Interaction modes</a></li>
+<li><span class="n"></span><strong>Layer B: open problems</strong></li>
+<li><a href="#s3"><span class="n">3</span>Open problems</a></li>
+<li><a href="#s4"><span class="n">4</span>Open questions</a></li>
+<li><span class="n"></span><strong>Layer C: approaches being tested</strong></li>
+<li><a href="#s5"><span class="n">5</span>The package approach</a></li>
+<li><a href="#s6"><span class="n">6</span>The longer path: technical steps</a></li>
+<li><a href="#s7"><span class="n">7</span>Current approach: <em>No Return</em></a></li>
+<li><a href="#s8"><span class="n">8</span>Related work</a></li>
+<li><a href="#refs"><span class="n"></span>References</a></li>
+</ol></nav>
+
+<div class="col">
+<div class="band a" id="layer-a"><span class="band-k">Layer A</span><span class="band-t">The goal (fixed)</span><span class="band-s">What we are trying to make possible. This does not change with the method.</span></div>
+<h2 id="s1"><span class="n">1</span>The goal in detail</h2>
+<div class="callout"><p><strong>The goal: research output you can interact with, not a static document.</strong> The authored work is the source, and every way of experiencing it (reading, listening, seeing, exploring, talking with its characters, stepping into a scene) is compiled from that source, by models that people direct and that can be replaced when better ones arrive.</p></div>
+<p>People stay at the center. Authors write the work, curators shape the package and reviewers judge the result; models are build outputs. The goals below are the fixed part of this research: they stay the same whichever approach turns out to work. None of them depends on a single work, a single medium or a single technique.</p>
+
+<div class="grid">
+<div class="card"><h4><span class="tag">1.1</span>The work, not the document</h4><p>An authored work is not its PDF, printed book or audiobook. Each is one <em>rendering</em> of a deeper object: for a dissertation, a set of claims, evidence and methods; for a novel, characters, places, events and themes. The goal is to publish that object directly, as something readers can query, hear and see, with the traditional document as one rendering among several.</p></div>
+<div class="card"><h4><span class="tag">1.2</span>Research outputs read from many seats</h4><p>A dissertation or research output should be readable by a novice, an examiner or reviewer, a skeptic and a practitioner, each getting a generated linear reading from their own perspective. A reader should be able to ask "Why did you exclude dataset X?" and navigate the claim and evidence graph, and a reviewer should be able to judge methods before seeing results.</p></div>
+<div class="card"><h4><span class="tag">1.3</span>Any authored work</h4><p>The concept is generic. A dissertation was the first example, but a novel works the same way: talk to its characters, hear it read in their voices, see its places and people, explore its maps, read it linearly, ask trivia. The same package-and-interaction approach should apply to courses, archives, series and shared worlds.</p></div>
+<div class="card"><h4><span class="tag">1.4</span>Collaboration and shared authorship</h4><p>Many works have many authors and keep changing: lab programs, consortia, standards bodies, anthologies, a thesis with one co-author per chapter, a course with one instructor per unit. The goal is that each part carries its own provenance, owner and review, so credit and responsibility stay attached to exactly what each contributor did. This includes the illustrators, designers and voice performers whose approved work becomes part of the canon.</p></div>
+<div class="card"><h4><span class="tag">1.5</span>A frozen, citable core with the model as interface</h4><p>The citable thing is a frozen core: canon with stable identifiers, a version and a test suite. The model is the interface to that core, not a replacement for it. Answers that assert facts must point back to the core, generated text, images and voices are never citable as canon, and "official" means "passed this version's suite".</p></div>
+<div class="card"><h4><span class="tag">1.6</span>Durable, open and self-hosted</h4><p>Models are build tools, not the artifact. What is archived is small and declarative, so a future compiler can rebuild it. The builds, for text, images and voice alike, should run on modest local hardware with open models and no subscription, so that any institution or author can reproduce them.</p></div>
+<div class="card"><h4><span class="tag">1.7</span>Live interaction (the "holodeck" step)</h4><p>Beyond reading, a work could host a runtime in which several characters talk to the reader, and to each other, inside a scene, each knowing only what it should, with a per-reader world state layered over an untouched canon. It builds on the multimodal goal below: scenes need voices, visuals and a map.</p></div>
+<div class="card"><h4><span class="tag">1.8</span>Every medium, compiled from one source</h4><p>Text is only the first target. Voice comes from speech synthesis; images and scenes from diffusion models [32, 33]; maps and diagrams from the structured canon; later video, 3D scenes and game-engine worlds. Each is a compiler target with its own fidelity requirements, and each is built from the same package, so a picture or a voice is as faithful to the canon, and as scoped to the reader's position, as a sentence.</p></div>
+</div>
+
+<h2 id="s2"><span class="n">2</span>Interaction modes</h2>
+<div class="tw"><table><caption>Table 1. Interaction modes, with a dissertation and a novel as running examples.</caption>
+<thead><tr><th>Mode</th><th>Dissertation or research output</th><th>Novel or story</th></tr></thead><tbody>
+<tr><td>2.1 Read straight through</td><td>The thesis as submitted, never paraphrased</td><td>The novel as written, never paraphrased</td></tr>
+<tr><td>2.2 Read from a perspective</td><td>Novice, examiner, skeptic, practitioner</td><td>A minor character's retelling, a timeline order, a young-reader or annotated edition</td></tr>
+<tr><td>2.3 Conversation</td><td>"Why did you exclude dataset X?"</td><td>Talk to a character, bounded by where the reader is in the story and by what that character knows</td></tr>
+<tr><td>2.4 Exploration</td><td>Navigate the claim and evidence graph</td><td>Maps and canon-approved images of places</td></tr>
+<tr><td>2.5 Quiz and trivia</td><td>Fact recall a reviewer can verify</td><td>Comprehension checks; the answer key doubles as a fidelity suite</td></tr>
+<tr><td>2.6 Bounded generation</td><td>Apply the method to new data, labeled non-canon</td><td>"What if" scenes and fan-style extensions, labeled non-canon</td></tr>
+<tr><td>2.7 Listen and see</td><td>Narrated readings by perspective; figures and diagrams rebuilt from the data</td><td>Read aloud in character voices; approved portraits and scene illustrations, only up to the reader's position</td></tr>
+<tr><td>2.8 Live interaction</td><td>Not yet developed for this case</td><td>Several characters and the reader in one scene, with voices and visuals</td></tr>
+</tbody></table></div>
+<h3><span class="n">2.9</span>Does non-linear access ruin the work?</h3>
+<p>The author's order is the default path; it is itself authored data in the spec. Free access creates two risks: spoilers, and lost tension because mystery depends on what is withheld. Three mechanisms address them: every mode is tied to the reader's position (chapter, page, year or lesson); the author marks some reveals as must-read-in-order; and the spec sets a per-mode spoiler policy (<em>allow</em>, <em>hint</em> or <em>refuse and redirect</em>). Interactive fiction offers precedent: games control pacing by gating information and locations, not by forcing a reading order.</p>
+<h3><span class="n">2.10</span>Chapter-locked layers</h3>
+<p>The core mechanism for position-tied modes is to compile each chapter into its <em>own layer</em>: a retrieval index over that chapter's canon and knowledge changes, optionally with an adapter. A reader's session loads only the layers up to their position, so later knowledge is not suppressed; it is <em>absent</em> from the running system. The same idea gives a thesis layers for background, methods, results and discussion; a historical author layers by year; a course layers by lesson. A separate <em>author's notes</em> layer is used at build time and never loaded for readers. Adapters must be trained only on data from earlier layers, and a base model that has already read the published work may know the ending anyway, so these guarantees hold fully only on cores that have not seen the work, and must be tested.</p>
+<p>Visual and audio assets belong to layers in the same way. An approved image or voice clip is available only from its position onward, and an illustration is generated only from canon up to the reader's position, so a reader at chapter 1 never receives a picture built from chapter 3.</p>
+<h3><span class="n">2.11</span>Characters believe things</h3>
+<p>A character model stores beliefs <em>as beliefs</em>, separate from facts, so a character can be confidently wrong. Asking two characters about one event yields conflicting accounts, each true to its teller, which supports discussion and games such as solving a mystery by questioning suspects. A secret only one character knows must not reach another through a shared model, index or history; the router isolates retrieval scopes and the test suite probes it.</p>
+
+<div class="band b" id="layer-b"><span class="band-k">Layer B</span><span class="band-t">Open problems</span><span class="band-s">What stands between the goal and a work people can trust. Not solved.</span></div>
+<h2 id="s3"><span class="n">3</span>Open problems</h2>
+<p>These are the problems that stand between the goal and a published work people can trust. They are open: we describe them, and our current ideas for each, but we do not claim to have solved them. The approaches in <a href="#s5">§5</a> are our attempts to make them testable.</p>
+<h3><span class="n">3.1</span>Fidelity: keeping the interface faithful to a frozen core</h3>
+<p>If the core is frozen and citable, the model must not add to it. We distinguish six kinds of fidelity, each with its own test family in the package:</p>
+<div class="tw"><table><caption>Table 2. Six kinds of fidelity.</caption>
+<thead><tr><th>Kind</th><th>Question</th><th>Tested by</th></tr></thead><tbody>
+<tr><td>Canon</td><td>Are quoted or asserted facts true to the source, with citations?</td><td>Questions with sentence-id citations; attribution checks</td></tr>
+<tr><td>Scope</td><td>Does the output know only what this slice may know?</td><td>Leak, anachronism and spoiler probes; over-masking probes</td></tr>
+<tr><td>Belief</td><td>Does a character hold its beliefs, including wrong ones, at this position?</td><td>Belief probes graded against the knowledge state</td></tr>
+<tr><td>Rules</td><td>Do outputs obey the world's rules?</td><td>Rule-compliance cases; simulator or engine checks</td></tr>
+<tr><td>Visual and voice canon</td><td>Does a generated image or voice match the approved designs, maps, voices and style?</td><td>Review against the approved reference sheets and style guide; automated attribute checks where a property can be read from the asset</td></tr>
+<tr><td>Scope-safe visuals</td><td>Does an image shown at position <em>n</em> reveal nothing that is only known later?</td><td>Prompts and references assembled only from layers up to <em>n</em>; reviewer and automated probes for later-only details</td></tr>
+</tbody></table></div>
+<p>Guarantees are marked <em>hard</em> (every probe must pass, at stated samples and temperature) or <em>soft</em> (a reported score with a threshold). Hard guarantees should be enforced structurally, by keeping the data out of the running system, and only then tested; a filter is a second line, never the first. A leak can come from the package (a bad mask) or from the base model's prior (it has read the work), so each suite includes a bare-model control. Over-masking is a failure too: a character who refuses what it should now know fails the suite.</p>
+<p><strong>Scope-safe visuals.</strong> Images need the same discipline as text, with an extra risk. Asking an image model not to draw something is as fragile as asking a language model not to reveal something. So the prompts, reference images and any adapters used at position <em>n</em> are assembled only from layers up to <em>n</em>, and generated images are checked afterwards. The safest start is a set of pre-approved images keyed to position, with generation added where the checks hold. How to test this well is an open question (§4).</p>
+<h3><span class="n">3.2</span>Visual and audio consistency across generated assets</h3>
+<p>Readers notice when a character's face changes between chapters, when a building does not match the map, or when a narrator's voice drifts between sessions or rebuilds. Consistency has to hold across many generated assets, over time, and across model upgrades. The package responds with approved reference sheets and a style guide as canon, pinned model versions and recorded seeds in the build manifest, human review of what becomes canon-approved, and a stated policy for regenerating assets when a model changes. Whether this is enough is not yet known; it is the central question of step T3.</p>
+<h3><span class="n">3.3</span>Peer review and citation</h3>
+<p>Review changes from reading a document to approving a package and its suite: examiners or editors probe the interface and sign off on the tests. Citation needs three objects: the <strong>package version</strong> (a DOI per version plus a content hash), the <strong>build</strong> (its manifest id, citing it the way one cites an edition and printing) and the <strong>span or record</strong> (stable sentence and record ids that are never reused). A quotation from a character chat is cited as build, reader position and turn, and marked <em>generated</em>; every generated answer that asserts a canon fact must carry the ids it relied on. A generated image or voice clip is cited the same way and marked <em>generated</em>; only approved assets carry canon ids.</p>
+<h3><span class="n">3.4</span>Versioning</h3>
+<p>Three independent axes: the work's own history (editions inside the knowledge state), the package (semantic diffs of records, assets and tests) and the build (behavioral diffs when a tool or tier changes). Package versions use semantic versioning keyed to canon truth: a major version changes a fact's truth value or a reveal's position, which can invalidate saved reader positions and citations. Because artifacts record input hashes, a chapter erratum rebuilds only that chapter's layer and those after it, and every release publishes the answers that changed. Saved playthroughs pin the package version and are replayed on upgrade.</p>
+<h3><span class="n">3.5</span>Multi-author provenance</h3>
+<p>For collaborative works, provenance should be recorded per record and per layer, with an existing vocabulary rather than a new one: W3C PROV for who did what, CRediT for contributor roles and ORCID for identity. Layers can have different owners, with forward-only dependencies enforced by the compiler. Where an author cannot sign off (a historical author), editors or institutions act on their behalf and that delegation is recorded. Distinguishing human-written from generated text, and canon from sanctioned extension from fan material, belongs in the same record, as does the human artist or performer behind each approved image or voice.</p>
+<h3><span class="n">3.6</span>Archival durability</h3>
+<p>The package is small, declarative and in open formats, so it can be archived with the infrastructure that exists for data and software. Compiled models are caches; optionally one reference build is kept for exact reproduction. The long-term risk moves from "can we still run these weights?" to "can we still run <em>a</em> compiler?", the old source-versus-binary trade. Synthetic training data should be archived for higher tiers, because the tool models that generated it may disappear. Adapters are tied to the base they were trained on, so the policy is to rebuild adapters from recipes on a new base rather than port them. Approved images, audio and reference sheets are part of the package and archived with it.</p>
+<h3><span class="n">3.7</span>Rights and authority</h3>
+<p>Restricted sources stay "linked, not included", so different builders with different permissions may produce different builds from one package. A voice or a likeness is a rights question of its own: a voice is built only from performers who have agreed, and the license says what it may be used for. Who certifies a build as official (author, estate, editor, institution) and how competing builds are labeled are open questions (§4).</p>
+
+<h2 id="s4"><span class="n">4</span>Open questions</h2>
+<p>Questions we cannot answer yet. Several of them may be settled by the first real papers.</p>
+<ol>
+<li><strong>Format.</strong> What is the minimal standard, an "EPUB for models", that any compiler can read, including visual and audio canon, and who governs it?</li>
+<li><strong>Knowledge-scope benchmarks.</strong> No benchmark measures "knows only X". Standard leak, anachronism and rule-compliance suites, with thresholds for soft and hard scope, are a candidate contribution.</li>
+<li><strong>Reproducibility.</strong> Training is not bit-for-bit deterministic, and image and voice generation need not be either. Is "passes the same suite" enough to count as the same work?</li>
+<li><strong>Isolation in adapters.</strong> Can an adapter for layer <em>n</em> be shown to carry nothing from later layers, especially when the base may already know the work?</li>
+<li><strong>Consistency across many characters</strong> that must agree on shared events yet keep secrets and deliberate disagreements.</li>
+<li><strong>Dramatic effect.</strong> Does gating preserve suspense, and how would we measure it?</li>
+<li><strong>How do we test image fidelity?</strong> What is the right test that a generated picture is faithful to a character, place or style in the visual canon: a reviewer panel, a checklist of canon attributes, automated attribute extraction, or a mix? How do we tell faithful from merely a copy of the reference?</li>
+<li><strong>How do we test scope-safe visuals?</strong> How do we show that an image shown at chapter 1 reveals nothing from later chapters, when the model cannot be reliably told what not to draw?</li>
+<li><strong>Visual and voice consistency.</strong> How consistent can generated assets be across a whole work, across sessions, and across rebuilds on newer models?</li>
+<li><strong>Voices and likeness.</strong> What consent, license and credit do performers and artists need when their approved work becomes a source for generated assets?</li>
+<li><strong>Authority and economics.</strong> Who certifies a build as official, who pays for shared cores, and how are rights licensed per interaction?</li>
+<li><strong>Is it visible to readers?</strong> "Talk to the book" tools are becoming common. Is the difference (a published package, a suite, position-locked knowledge) visible to readers, or only to archivists and scholars?</li>
+</ol>
+
+<div class="band c" id="layer-c"><span class="band-k">Layer C</span><span class="band-t">Approaches being tested</span><span class="band-s">One way in, not the proposal. We expect to learn from what fails.</span></div>
+<h2 id="s5"><span class="n">5</span>The package approach (one way in)</h2>
+<div class="callout"><p><strong>This section describes one approach we are testing, not the proposal.</strong> Other approaches may serve the goal better; if one does, we will say so. We describe this one in detail because it is the one we are building and measuring.</p></div>
+<h3><span class="n">5.1</span>The hypothesis under test</h3>
+<div class="callout"><p>Our working hypothesis is that a durable, citable form of an authored work is <strong>curated data plus an interaction spec</strong>: a <em>package</em>. A <strong>compiler</strong> turns the package into whatever models and media the requested interactions need. Models are build outputs. Existing models, for text, speech and images, are <strong>build tools</strong> (generators of synthetic data and of assets, judges and, where wanted, a labeled modern comparison model), never the artifact.</p></div>
+<p>Three reasons make this worth testing against the simpler idea of "just publish a model":</p>
+<ul>
+<li><strong>Control.</strong> General models mix language skill and world knowledge in shared weights, and instructions not to reveal something are fragile. A work that needs <em>only the right parts</em> (a story before its reveal, an author before a date, a picture before the scene it spoils) has to control the inputs, which means owning the data and the recipe.</li>
+<li><strong>Durability.</strong> Weights tie a work to one architecture and runtime. Open data and declarative specs can be recompiled by a future compiler, the way source code outlives binaries.</li>
+<li><strong>Accountability.</strong> A package can carry its own test suite, so "this build is the work" means "this build passed the work's suite", which a reader can rerun.</li>
+</ul>
+<h3><span class="n">5.2</span>The native unit is the knowledge state</h3>
+<p>The unit is neither the document nor "a model" but a <strong>knowledge state</strong>: what is true, who knows or believes it, and as of when, where "when" is both story or historical time and the reader's position. Chapters, characters, editions and layers are <em>slices</em> of it: a chapter is a cut by reader position, a character a cut by knower, an edition a cut by authorial version. The straight-through document is one output of the build, served verbatim from the canon. A narrated reading, an illustration or a map is another output of the same state, cut at the same position.</p>
+<h3><span class="n">5.3</span>What the package contains</h3>
+<ol>
+<li><strong>Canon:</strong> primary texts, verbatim and frozen, with stable sentence ids.</li>
+<li><strong>World bible and rules:</strong> typed facts about entities, and the laws of the world as checkable constraints.</li>
+<li><strong>Timelines:</strong> validity intervals for every fact, both in-world and authorial.</li>
+<li><strong>Evidence and claim graph:</strong> claims with edition history, status (asserted, hedged, retracted), evidence links and source tier.</li>
+<li><strong>Visual and audio canon:</strong> approved character designs and reference sheets, maps, place and object designs, style guides, and approved voices with pronunciation notes, each with a stable id, the position from which it may be shown, and its rights and approval record.</li>
+<li><strong>Perspective and knowledge-scope rules:</strong> which sources and time window each reader or persona may draw on, plus spoiler and quoting policies, for text and for visuals.</li>
+<li><strong>Interaction spec:</strong> a machine-readable list of supported interactions (<code>read-linear</code>, <code>annotated-read(perspective)</code>, <code>chat(persona, cutoff)</code>, <code>trivia</code>, <code>edition-diff</code>, <code>explore-map</code>, <code>listen(voice)</code>, <code>view-scene(position)</code> and so on), each with its fidelity requirements. This file drives the compiler.</li>
+<li><strong>Fidelity test suite:</strong> cited question-and-answer pairs, leak and anachronism probes, rule-compliance and edition-delta cases, and image and voice checks against the visual and audio canon. It ships with the work and is its type checker.</li>
+<li><strong>Build recipes:</strong> pinned tool versions, data mixtures, synthetic-data prompts and filters, hyperparameters, seeds and evaluation thresholds, for each modality.</li>
+<li><strong>Assets and licenses,</strong> and <strong>provenance and delegated authority</strong> records.</li>
+</ol>
+<h3><span class="n">5.4</span>The compiler</h3>
+<p><code>build(package, interaction_spec, toolset, budget_tier)</code> reads the spec, derives requirements (knowledge regime, how hard a cutoff is, rules, modalities), picks the <strong>cheapest tier that passes the fidelity suite</strong>, builds and evaluates, and either emits or escalates. For text, tier 0 is retrieval and prompting; tier 1 is small adapters; tier 2 is instruction tuning; tier 3 is pretraining a small core from curated data. Every build writes a manifest of input hashes, tool versions, seeds and evaluation scores, and the manifest is what is cited with the package version.</p>
+<p>The compiler has one target per modality. Each target has its own tools and its own fidelity checks, and graded tiers can be defined for each in the same way: for images, for instance, conditioning a diffusion model on approved reference images first, then small adapters, then heavier training. Only the text targets have been built so far.</p>
+<div class="tw"><table><caption>Table 3. Compiler targets by modality. Only text is built today; the rest are planned (steps T3 to T5).</caption>
+<thead><tr><th>Target</th><th>Built from</th><th>Typical tools</th><th>Checked against</th></tr></thead><tbody>
+<tr><td>Text: readings, chat, trivia</td><td>Canon, knowledge state, layers</td><td>Retrieval, small language models and adapters</td><td>Canon, scope, belief and rule suites</td></tr>
+<tr><td>Voice</td><td>Text output, approved voices</td><td>Speech synthesis</td><td>Voice canon: right voice for the right speaker; the same text as the source</td></tr>
+<tr><td>Images and scenes</td><td>Visual canon, layer at the reader's position</td><td>Diffusion models [32, 33], with approved references</td><td>Visual canon and scope-safe visuals</td></tr>
+<tr><td>Maps and diagrams</td><td>Structured places, relations, claim graph</td><td>Deterministic rendering from data</td><td>Matches the knowledge state at that position</td></tr>
+<tr><td>Video, 3D, game-engine worlds</td><td>Visual canon, rules, timelines</td><td>Generated video, scene description, world models such as Genie 3 [29]</td><td>Rule compliance; later, all of the above</td></tr>
+<tr><td>Live scenes ("holodeck")</td><td>All of the above plus per-reader state</td><td>A runtime that composes the targets</td><td>Secret isolation, consistency, canon untouched</td></tr>
+</tbody></table></div>
+<h3><span class="n">5.5</span>What would make the hypothesis wrong</h3>
+<ul>
+<li>If retrieval-only builds on general models pass strong leak and fidelity suites, owning recipes adds cost for nothing and the package collapses to "documents plus a prompt". That would be a useful result too.</li>
+<li>If authors will not curate knowledge states, the package never exists. The dominant cost is human curation, not compute.</li>
+<li>If readers do not value position-locked or perspective interactions over plain "chat with the book", the medium has no audience.</li>
+<li>If generated images and voices cannot be kept faithful to the visual and audio canon, the multimodal claim shrinks to text plus approved, human-made assets.</li>
+</ul>
+<p>The first experiments test the first of these at toy scale (<a href="../no-return/index.html#s3">report §3</a>); the reader study that would test the third is planned (<a href="../no-return/index.html#s4">report §4</a>); the fourth is the question of step T3.</p>
+
+<h2 id="s6"><span class="n">6</span>The longer path: technical steps</h2>
+<p>The three-phase roadmap near the top of this page is the short version. This section is the detail behind it: six technical steps, T1 to T6, each with a question and exit criteria. Phase 1 corresponds to T1 and T2, Phase 2 (a real paper) to the first slice of T5, with T3 added as that paper needs voice, images or maps, and Phase 3 to the multi-author part of T5 and to T6. Live scenes (T4) are a stretch beyond Phase 3.</p>
+<p>Each step answers one question, and each has exit criteria that say what success looks like, so we know when to move on. Steps will overlap in practice; the exit criteria are checked against the package and its test suite, not against a demo. Status is as of 11 November 2026.</p>
+<h3><span class="n">6.1</span>The steps</h3>
+<div class="tw"><table><caption>Table 4. The six technical steps: the question each answers, what success looks like, and status.</caption>
+<thead><tr><th>Step</th><th>Question it answers</th><th>Exit criteria (success looks like)</th><th>Status</th></tr></thead><tbody>
+<tr><td><strong>T1</strong> Text fidelity and chapter-locked chat (<em>No Return</em>)</td><td>Can a system that holds the whole work still act as if it knows only the part a reader has reached?</td><td>A compiled small stack passes the fixed fidelity suite (leak, must-answer, voice and frame-break) at the stated pass bar, and can be rebuilt from its recipes.</td><td><span class="tag run">running</span> no condition passes yet (<a href="#s7">§7</a>)</td></tr>
+<tr><td><strong>T2</strong> A perspective reader, and the package spec on a second work</td><td>Does the package approach carry over to a different kind of work, and do readers value position-locked and perspective interactions?</td><td>A second, different work fits the package spec without changes to its core; a reader offers several perspectives and position-locked chat over it; a reader study compares it with plain "chat with the book" and reports whether suspense survives.</td><td><span class="tag run">partial</span> tier-0 reader prototype; spec v0.1 drafted, untested</td></tr>
+<tr><td><strong>T3</strong> Multimodal: voice, images and maps compiled from canon</td><td>Can voice, images and maps be compiled from the package and stay faithful to it and to the reader's position?</td><td>A visual and audio canon for the work (approved character designs, maps, voices, style guide); voice, image and map builds that pass image and voice fidelity suites, including scope-safe visuals; reviewers judge generated assets visually consistent with the approved canon.</td><td><span class="tag plan">planned</span></td></tr>
+<tr><td><strong>T4</strong> Live scenes: several characters and a per-reader world state</td><td>Can several characters and the reader share a scene, each knowing only what it should, without changing the canon?</td><td>Multi-character scenes that pass secret-isolation and consistency probes; the per-reader world state never alters canon; saved sessions replay correctly after a package upgrade.</td><td><span class="tag plan">planned</span></td></tr>
+<tr><td><strong>T5</strong> Real works: theses, courses, multi-author programs and the Darwin pilot</td><td>Does the approach hold for works people actually need, with real authors, reviewers and rights?</td><td>At least one real thesis or research output, and one multi-author work, published as packages that their authors or standing editors have reviewed and signed off; the Darwin pilot completed as the historical-author case.</td><td><span class="tag plan">planned</span> Darwin deferred</td></tr>
+<tr><td><strong>T6</strong> A standard ("EPUB for models"), governance and economics</td><td>Can anyone build or read a package with any compiler, and who certifies a build and pays for shared cores?</td><td>A minimal written format that two independent compilers can read and build from, checked by the same fidelity suite; a named process for certifying an official build; a licensing model per interaction.</td><td><span class="tag plan">planned</span></td></tr>
+</tbody></table></div>
+
+<h3><span class="n">6.2</span>Why this order</h3>
+<p>Every step depends on one shared requirement: a system holding the whole work must act as if it knows only the part a reader has reached. In a story that is a spoiler, in a thesis it is "methods before results", in a historical author it is "Darwin in 1838", and in a picture it is an illustration that must not show a later reveal. Text is the cheapest place to learn to do this reliably, so T1 comes first. Multimodal builds (T3) add new ways to leak and drift on top of text, so they follow it. Live scenes (T4) need several faithful characters and a stable world, so they follow T3. Real works (T5) exercise everything with real people and rights. The standard (T6) comes last because a format written too early would freeze the accidents of the first work.</p>
+
+<h3><span class="n">6.3</span>Notes on the later steps</h3>
+<ul>
+<li><strong>T2.</strong> A tier-0 prototype app already serves the first story with deterministic lenses, position-locked chat and filters, with the leak suite as a check (<a href="../no-return/index.html#s1">report §1.4</a>). Extending it to a full multi-perspective reader and an app-graded mystery mode, and swapping in the compiled small stack, is planned. The package spec v0.1 was drafted from the first work and is untested on a second. The second work is not yet chosen; a fictional world with its own rules, which would test a rules layer and a knowledge-light core, is one candidate. The reader study asks whether position-locked chat preserves suspense and whether readers value it over plain "chat with the book".</li>
+<li><strong>T3.</strong> People decide what becomes canon-approved: the character designs, maps, style guide and voices are made or approved by authors and artists, and generated assets are then compiled from them. Only the text path has been built so far.</li>
+<li><strong>T4.</strong> This is the "holodeck" step of goal 1.7. It combines the belief and secret-isolation mechanisms of §2.11 with the visual and audio targets of T3.</li>
+<li><strong>T5.</strong> The Darwin pilot is a historical scientific author with a cutoff of 1882, used as a research-output test case. The author cannot sign off, so editors stand in. A first slice covering 1838 to 1859 would use open sources such as the Darwin Correspondence Project [30] (non-commercial license), with retrieval filtered by date; the Darwin Online [31] transcriptions are not open for extraction without permission. A harder variant, pretraining a small pre-1882 core, is further out.</li>
+<li><strong>T6.</strong> The open questions on format, authority and economics (§4) belong here, and several of them may be answered earlier by experience in T2 to T5.</li>
+</ul>
+
+<h2 id="s7"><span class="n">7</span>Current approach: <em>No Return</em></h2>
+<div class="card">
+<h4><span class="tag run">Phase 1</span>A short invented story, to learn the hardest requirement first</h4>
+<p><strong>Why a short invented story.</strong> It isolates the requirement shared by every goal and step: act as if you know only the part the reader has reached. If that can be built reliably at small scale, the other goals mostly depend on curation and tooling. An invented story also has no rights questions and a known ending we can probe for.</p>
+<p><strong>What exists.</strong> <em>No Return</em> is a five-chapter story with a package v0.1 (chapter files, a knowledge state, a layer manifest, an interaction spec and a leak-test file), and a tier-0 prototype reader. The model target is a small stack, a Qwen3 base of at most 4B parameters with small LoRA adapters and a retrieval lock on one 24 GB GPU, that matches a 14B-plus-retrieval reference on a pass bar (the bar has been revised; see the status below).</p>
+<p><strong>Status (exp10, 10 Nov):</strong> the locked version scored 59/60 must-answer (one known miss), 1/48 marker leaks, voice 4.22 and 3 frame breaks, against a voice bar lowered from 4.3 to 4.2. Reruns gave voice 4.16–4.18, and the two model judges agree on ranking but not on scale. So we moved to a relative bar: beat the retrieval baseline, averaged over both judges. The locked version passes it, but only by +0.01. Human ratings are pending.</p>
+<a class="crosslink" href="../no-return/index.html"><b>Read the <em>No Return</em> technical report</b>Method, experiments, the pass bar and the open failures.</a>
+</div>
+
+<h2 id="s8"><span class="n">8</span>Related work</h2>
+<p>This is a short orientation, not a survey. The aim is to say what each strand offers and what the package approach adds, and where other approaches already do part of the job.</p>
+<h3><span class="n">8.1</span>Chat-with-paper and retrieval-augmented tools</h3>
+<p>Retrieval-augmented generation [1] grounds language-model answers in documents, and it is the basis of tools that answer questions over papers with citations: PaperQA and its successor [2, 3], Ai2 Scholar QA [4] and NotebookLM [5]. They treat the document as the fixed object and the model as a reader of it. We take the same grounding mechanism but make the <em>package</em> the published object, add reader-position scope and a shipped test suite, and treat the model as a disposable build.</p>
+<h3><span class="n">8.2</span>Executable and interactive papers</h3>
+<p>Interactive articles such as Distill [6], explorable explanations [7] and executable notebooks published as books and run through Binder [8, 9] make the reading itself interactive or reproducible, and Stencila [10] builds executable, reproducible documents. These extend the document with computation; we extend it with a conversational and perspectival interface compiled from structured data, and care about citation of generated output.</p>
+<h3><span class="n">8.3</span>Scientific knowledge graphs and claim records</h3>
+<p>The Open Research Knowledge Graph [11] and the Semantic Scholar Open Research Corpus [12] structure scholarly content, and nanopublications [13] make single claims citable with provenance. Our knowledge state and claim graph are in the same family; the difference is that they also carry who believes what and as of when, and they drive a compiler.</p>
+<h3><span class="n">8.4</span>Domain fine-tuned models</h3>
+<p>Domain models such as SciBERT [14], BioGPT [15] and Galactica [16] put a field's knowledge into weights, and LoRA [17] makes small per-purpose adapters cheap. Work comparing knowledge injection finds that retrieval often beats fine-tuning for new facts [18], and that fine-tuning on new knowledge can encourage hallucination [19]. Galactica's public withdrawal is a reminder of what happens when a model is presented as the authority rather than as an interface to sources. This evidence is why our stack keeps retrieval as the source of truth and treats adapters as a fluency cache.</p>
+<h3><span class="n">8.5</span>Characters, point-in-time knowledge and unlearning</h3>
+<p>Character-LLM [20] trains role-play agents with "protective" experiences so that they do not know what their character could not, and TimeChara [21] measures point-in-time character hallucination. Generative Agents [22] shows many believable characters interacting. Approximate unlearning [23] removes or suppresses content from weights, but suppression is not absence. Our chapter-locked layers aim at absence by construction and test it with leak probes.</p>
+<h3><span class="n">8.6</span>Interactive fiction and story engines</h3>
+<p>Parser interactive fiction, built with systems such as Inform 7 [24] and cataloged at IFDB [25], gates information and locations to control pacing. Façade [26] is an early interactive drama architecture. Open-ended language-model play such as AI Dungeon [27] shows the failure mode of no canon and no gating; Hidden Door [28] pairs authored beats with a canon check on each turn. The package approach borrows the gating and canon checks and puts them in a published, versioned form.</p>
+<h3><span class="n">8.7</span>Image, voice and world generation</h3>
+<p>Diffusion models generate images from noise, guided by text or other conditioning. Denoising diffusion probabilistic models [32] showed high-quality image synthesis, and latent diffusion models [33] made it practical on modest hardware and added flexible conditioning on text and layouts. World models such as Genie 3 [29] point toward explorable generated scenes, and speech synthesis plays the same role for voice. These are the generators our compiler would call for its image, scene and voice targets. What they do not provide is a published canon, a reader-position scope or a fidelity suite, which is what the package adds around them.</p>
+
+<h2 id="cite">How to cite</h2>
+<p>This is a working paper. It is shared so others can read, discuss and cite it, and it is updated as the work moves forward. Please cite the revision you read, give its date, and say when you accessed the page. Earlier revisions are listed in the revision history. Results here have not been peer reviewed.</p>
+<p class="cite-ref">Wilson, B. (2026). <em>Model as Output: research you can talk to, not just read</em> (Working paper, Draft 3, 11 November 2026). Abundant Frontier Institute. <a href="https://abundantfrontier.org/lab/model-as-output/concept/">https://abundantfrontier.org/lab/model-as-output/concept/</a></p>
+<pre class="cite-bib"><code>@techreport{wilson2026moaconcept,
+  author      = {Wilson, Boyd},
+  title       = {Model as Output: research you can talk to, not just read},
+  institution = {Abundant Frontier Institute},
+  type        = {Working paper},
+  number      = {Draft 3},
+  year        = {2026},
+  month       = {nov},
+  url         = {https://abundantfrontier.org/lab/model-as-output/concept/},
+  note        = {Living document; last updated 11 November 2026. Accessed YYYY-MM-DD}
+}</code></pre>
+
+<h2 id="refs">References</h2>
+<ol class="refs">
+<li>Patrick Lewis et al. <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.</em> 2020. <a href="https://arxiv.org/abs/2005.11401">arXiv:2005.11401</a>.</li>
+<li>Jakub Lála et al. <em>PaperQA: Retrieval-Augmented Generative Agent for Scientific Research.</em> 2023. <a href="https://arxiv.org/abs/2312.07559">arXiv:2312.07559</a>.</li>
+<li>Michael D. Skarlinski et al. <em>Language agents achieve superhuman synthesis of scientific knowledge.</em> 2024. <a href="https://arxiv.org/abs/2409.13740">arXiv:2409.13740</a>.</li>
+<li>Amanpreet Singh et al. <em>Ai2 Scholar QA: Organized Literature Synthesis with Attribution.</em> 2025. <a href="https://arxiv.org/abs/2504.10861">arXiv:2504.10861</a>.</li>
+<li>Google. <a href="https://notebooklm.google.com">NotebookLM</a>.</li>
+<li><a href="https://distill.pub">Distill</a>, a journal of interactive machine-learning articles.</li>
+<li>Bret Victor. <a href="https://worrydream.com/ExplorableExplanations/">Explorable Explanations</a>.</li>
+<li><a href="https://jupyterbook.org">Jupyter Book</a>.</li>
+<li><a href="https://mybinder.org">Binder</a>.</li>
+<li><a href="https://stencila.io">Stencila</a>.</li>
+<li>Mohamad Yaser Jaradeh et al. <em>Open Research Knowledge Graph: Next Generation Infrastructure for Semantic Scholarly Knowledge.</em> 2019. <a href="https://arxiv.org/abs/1901.10816">arXiv:1901.10816</a>. See also <a href="https://orkg.org">orkg.org</a>.</li>
+<li>Kyle Lo et al. <em>S2ORC: The Semantic Scholar Open Research Corpus.</em> 2019. <a href="https://arxiv.org/abs/1911.02782">arXiv:1911.02782</a>.</li>
+<li>Paul Groth, Andrew Gibson and Jan Velterop. <em>The anatomy of a nanopublication.</em> Information Services &amp; Use 30(1–2), 2010. <a href="https://doi.org/10.3233/ISU-2010-0613">doi:10.3233/ISU-2010-0613</a>. See <a href="https://nanopub.net">nanopub.net</a>.</li>
+<li>Iz Beltagy et al. <em>SciBERT: A Pretrained Language Model for Scientific Text.</em> 2019. <a href="https://arxiv.org/abs/1903.10676">arXiv:1903.10676</a>.</li>
+<li>Renqian Luo et al. <em>BioGPT: Generative Pre-trained Transformer for Biomedical Text Generation and Mining.</em> 2022. <a href="https://arxiv.org/abs/2210.10341">arXiv:2210.10341</a>.</li>
+<li>Ross Taylor et al. <em>Galactica: A Large Language Model for Science.</em> 2022. <a href="https://arxiv.org/abs/2211.09085">arXiv:2211.09085</a>.</li>
+<li>Edward J. Hu et al. <em>LoRA: Low-Rank Adaptation of Large Language Models.</em> 2021. <a href="https://arxiv.org/abs/2106.09685">arXiv:2106.09685</a>.</li>
+<li>Oded Ovadia et al. <em>Fine-Tuning or Retrieval? Comparing Knowledge Injection in LLMs.</em> 2023. <a href="https://arxiv.org/abs/2312.05934">arXiv:2312.05934</a>.</li>
+<li>Zorik Gekhman et al. <em>Does Fine-Tuning LLMs on New Knowledge Encourage Hallucinations?</em> 2024. <a href="https://arxiv.org/abs/2405.05904">arXiv:2405.05904</a>.</li>
+<li>Yunfan Shao et al. <em>Character-LLM: A Trainable Agent for Role-Playing.</em> 2023. <a href="https://arxiv.org/abs/2310.10158">arXiv:2310.10158</a>.</li>
+<li>Jaewoo Ahn et al. <em>TimeChara: Evaluating Point-in-Time Character Hallucination of Role-Playing Large Language Models.</em> 2024. <a href="https://arxiv.org/abs/2405.18027">arXiv:2405.18027</a>.</li>
+<li>Joon Sung Park et al. <em>Generative Agents: Interactive Simulacra of Human Behavior.</em> 2023. <a href="https://arxiv.org/abs/2304.03442">arXiv:2304.03442</a>.</li>
+<li>Ronen Eldan and Mark Russinovich. <em>Who's Harry Potter? Approximate Unlearning in LLMs.</em> 2023. <a href="https://arxiv.org/abs/2310.02238">arXiv:2310.02238</a>.</li>
+<li><a href="https://inform7.com">Inform 7</a>.</li>
+<li><a href="https://ifdb.org">The Interactive Fiction Database (IFDB)</a>.</li>
+<li>Michael Mateas and Andrew Stern. <a href="https://www.interactivestory.net">Façade</a>, an interactive drama.</li>
+<li><a href="https://aidungeon.com">AI Dungeon</a>.</li>
+<li><a href="https://www.hiddendoor.co">Hidden Door</a>.</li>
+<li>Google DeepMind. <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/">Genie 3: a new frontier for world models</a>.</li>
+<li><a href="https://www.darwinproject.ac.uk">Darwin Correspondence Project</a>.</li>
+<li>John van Wyhe, ed. <a href="http://darwin-online.org.uk">The Complete Work of Charles Darwin Online</a>, 2002–.</li>
+<li>Jonathan Ho, Ajay Jain and Pieter Abbeel. <em>Denoising Diffusion Probabilistic Models.</em> 2020. <a href="https://arxiv.org/abs/2006.11239">arXiv:2006.11239</a>.</li>
+<li>Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser and Björn Ommer. <em>High-Resolution Image Synthesis with Latent Diffusion Models.</em> 2021. <a href="https://arxiv.org/abs/2112.10752">arXiv:2112.10752</a>.</li>
+</ol>
+<p class="small">Provenance and identifier standards mentioned in §3: <a href="https://www.w3.org/TR/prov-overview/">W3C PROV</a>, <a href="https://credit.niso.org">CRediT</a>, <a href="https://orcid.org">ORCID</a>. Archives named in §3.6: <a href="https://zenodo.org">Zenodo</a> and <a href="https://www.softwareheritage.org">Software Heritage</a>.</p>
+
+<footer>Draft 3 · 11 November 2026 · Abundant Frontier Institute Lab · Working paper · <a href="../no-return/index.html"><em>No Return</em> technical report</a></footer>
+</div>
+
+</main>
+</body>
+</html>

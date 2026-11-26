@@ -1,0 +1,20 @@
+Mon Nov  9 07:48:06 PM PST 2026	start	running	prepare
+Mon Nov  9 07:48:08 PM PST 2026	prepare	running	train v_light_dpo
+Mon Nov  9 07:49:21 PM PST 2026	train v_light_dpo	running	eval v_light_dpo
+Mon Nov  9 07:51:33 PM PST 2026	eval v_light_dpo_v	running	judge v_light_dpo_v
+Mon Nov  9 07:56:40 PM PST 2026	eval v_light_dpo_v_rag	running	judge v_light_dpo_v_rag
+Mon Nov  9 08:04:34 PM PST 2026	judge v_light_dpo_v v_light_dpo_v_rag	running	summarize
+Mon Nov  9 08:07:33 PM PST 2026	train v_light_contrast	running	eval v_light_contrast
+Mon Nov  9 08:07:52 PM PST 2026	eval v_light_contrast_v	running	judge v_light_contrast_v
+Mon Nov  9 08:12:10 PM PST 2026	eval v_light_contrast_v_rag	running	judge v_light_contrast_v_rag
+Mon Nov  9 08:18:08 PM PST 2026	judge v_light_contrast_v v_light_contrast_v_rag	running	summarize
+Mon Nov  9 08:20:58 PM PST 2026	train v_light_combo	running	eval v_light_combo
+Mon Nov  9 08:22:21 PM PST 2026	eval v_light_combo_v	running	judge v_light_combo_v
+Mon Nov  9 08:26:27 PM PST 2026	eval v_light_combo_v_rag	running	judge v_light_combo_v_rag
+Mon Nov  9 08:32:28 PM PST 2026	judge v_light_combo_v v_light_combo_v_rag	running	summarize
+Mon Nov  9 08:35:20 PM PST 2026	train v_light_dpo_replay	running	eval v_light_dpo_replay
+Mon Nov  9 08:37:37 PM PST 2026	eval v_light_dpo_replay_v	running	judge v_light_dpo_replay_v
+Mon Nov  9 08:42:19 PM PST 2026	eval v_light_dpo_replay_v_rag	running	judge v_light_dpo_replay_v_rag
+Mon Nov  9 08:49:27 PM PST 2026	judge v_light_dpo_replay_v v_light_dpo_replay_v_rag	running	summarize
+Mon Nov  9 08:52:21 PM PST 2026	sweep	running	checkpoint eval or skip
+Mon Nov  9 08:52:25 PM PST 2026	done	done	none

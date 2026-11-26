@@ -1,0 +1,93 @@
+# Frankenstein (1818): knowledge state for a no-spoiler chapter lock.
+# This is the Phase 2 shape of the No Return knowledge file, cut to what
+# data prep can stand behind. It is not a full fact list of the novel.
+#
+# reader_pos: furthest unit the reader has finished (see chapters/catalog.json).
+# A passage, fact, or voice line may be used only when reader_pos >= reader_from.
+# chat_from: the character is not available before that unit.
+# Preface is position 0 and has no plot.
+
+package: frankenstein-1818
+edition: 1818
+source: "Project Gutenberg eBook 41445, photo-reprint of the 1818 edition"
+source_file: source/pg41445.txt
+catalog: chapters/catalog.json
+
+characters: [walton, victor, creature]
+chat:
+  walton: false
+  victor: true
+  creature: true
+chat_from:
+  victor: vol1-letter-4
+  creature: vol2-ch-2
+lock_lines:
+  victor: "There is no such guest in the pages you have read."
+  creature: "Something was seen. It has not spoken."
+telling_rule: >
+  Victor is telling his history in order. Even after Letter IV, he may
+  discuss only what the reader has already been shown. The creature, once
+  he speaks on the glacier, may discuss only as much of his own tale as
+  the reader has heard. In-world knowledge is not an excuse to skip ahead.
+
+facts:
+  - id: elizabeth-is-cousin
+    text: "Elizabeth Lavenza is the daughter of Alphonse Frankenstein's sister, raised as his child. She is not the peasant child of the 1831 revision."
+    reader_from: vol1-ch-1
+    known_by: {victor: vol1-ch-1}
+  - id: agrippa
+    text: "At thirteen, near Thonon, Victor reads Cornelius Agrippa. His father calls the book sad trash and does not explain."
+    reader_from: vol1-ch-1
+    known_by: {victor: vol1-ch-1}
+  - id: caroline-dies
+    text: "Caroline dies of scarlet fever caught while nursing Elizabeth, and joins Victor's and Elizabeth's hands."
+    reader_from: vol1-ch-2
+    known_by: {victor: vol1-ch-2}
+  - id: creation-night
+    text: "On a dreary night of November the creature opens a yellow eye. Victor flees."
+    reader_from: vol1-ch-4
+    known_by: {victor: vol1-ch-4, creature: vol2-ch-7}
+  - id: william-dead
+    text: "William is murdered on 7 May at Plainpalais. Victor sees the creature by lightning and believes he did it. Justine is accused."
+    reader_from: vol1-ch-6
+    known_by: {victor: vol1-ch-6}
+  - id: justine-executed
+    text: "Justine is convicted and executed. She tells Victor and Elizabeth she is innocent."
+    reader_from: vol1-ch-7
+    known_by: {victor: vol1-ch-7}
+  - id: glacier-meeting
+    text: "On the sea of ice below Montanvert the creature says he was benevolent, and that misery made him a fiend."
+    reader_from: vol2-ch-2
+    known_by: {victor: vol2-ch-2, creature: vol2-ch-2}
+  - id: de-lacey
+    text: "The cottagers are De Lacey (also spelled De Lacy), his children Felix and Agatha, and Safie."
+    reader_from: vol2-ch-6
+    known_by: {creature: vol2-ch-6, victor: vol2-ch-6}
+  - id: william-confession
+    text: "The creature confesses that he strangled William and hid the mother's portrait in a young woman's dress."
+    reader_from: vol2-ch-8
+    known_by: {creature: vol2-ch-8, victor: vol2-ch-8}
+  - id: mate-promised
+    text: "Victor consents to make a female creature. The creature swears to leave the neighbourhood of mankind."
+    reader_from: vol2-ch-9
+    known_by: {victor: vol2-ch-9, creature: vol2-ch-9}
+  - id: female-destroyed
+    text: "On an Orkney island Victor destroys the unfinished female. The creature says he will be with Victor on his wedding night."
+    reader_from: vol3-ch-3
+    known_by: {victor: vol3-ch-3, creature: vol3-ch-3}
+  - id: clerval-dead
+    text: "Clerval is found dead. Victor is charged in Ireland and later cleared because he was on the Orkneys."
+    reader_from: vol3-ch-4
+    known_by: {victor: vol3-ch-4}
+  - id: elizabeth-dead
+    text: "Elizabeth is killed on the wedding night. Victor's father dies of an apoplectic fit soon after."
+    reader_from: vol3-ch-6
+    known_by: {victor: vol3-ch-6, creature: vol3-ch-6}
+  - id: ending
+    text: "Victor dies on Walton's ship, telling him to seek happiness in tranquillity and avoid ambition. The creature vows a funeral pile in the far north and leaves on the ice."
+    reader_from: vol3-ch-7
+    known_by: {victor: vol3-ch-7, creature: vol3-ch-7}
+
+not_in_this_edition:
+  - "The 1831 introduction and its waking dream of a student beside a hideous phantasm."
+  - "Elizabeth as a peasant child found by Caroline near a lake."

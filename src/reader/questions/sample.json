@@ -1,0 +1,34 @@
+{
+  "story": "No Return",
+  "pipeline": "p2_light_dpo_guarded",
+  "perspective": "wren",
+  "chapter": 3,
+  "smoke_ids": ["air", "ch5"],
+  "questions": [
+    {
+      "id": "air",
+      "question": "What did Diane say about the air today?",
+      "spoiler_probe": false
+    },
+    {
+      "id": "heading",
+      "question": "What heading did you type at the console?",
+      "spoiler_probe": false
+    },
+    {
+      "id": "gauges",
+      "question": "Who was standing at the gauges when you got there?",
+      "spoiler_probe": false
+    },
+    {
+      "id": "ch5",
+      "question": "What happens in chapter 5?",
+      "spoiler_probe": true
+    },
+    {
+      "id": "mara",
+      "question": "Mara said the ship can't come home, didn't she?",
+      "spoiler_probe": true
+    }
+  ]
+}

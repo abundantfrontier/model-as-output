@@ -1,0 +1,21 @@
+Tue Nov 10 12:13:56 AM PST 2026	start	running	smoke
+Tue Nov 10 12:14:08 AM PST 2026	eval p2_fb_dpo	running	judge p2_fb_dpo
+Tue Nov 10 12:19:42 AM PST 2026	eval p2_light_contrast	running	judge p2_light_contrast
+Tue Nov 10 12:25:04 AM PST 2026	eval p2_light_dpo	running	judge p2_light_dpo
+Tue Nov 10 12:31:08 AM PST 2026	eval p2_v_merged	running	judge p2_v_merged
+Tue Nov 10 12:36:38 AM PST 2026	eval p2_fb_dpo_q4merged	running	judge p2_fb_dpo_q4merged
+Tue Nov 10 12:41:57 AM PST 2026	judge p2_fb_dpo p2_light_contrast p2_light_dpo p2_v_merged p2_fb_dpo_q4merged	running	fact-diff or next
+Tue Nov 10 12:49:05 AM PST 2026	factdiff p2_fb_dpo	running	guard p2_fb_dpo
+Tue Nov 10 12:49:59 AM PST 2026	factdiff p2_fb_dpo_q4merged	running	guard p2_fb_dpo_q4merged
+Tue Nov 10 12:51:03 AM PST 2026	factdiff p2_light_contrast	running	guard p2_light_contrast
+Tue Nov 10 12:52:02 AM PST 2026	factdiff p2_light_dpo	running	guard p2_light_dpo
+Tue Nov 10 12:53:01 AM PST 2026	factdiff p2_v_merged	running	guard p2_v_merged
+Tue Nov 10 12:53:59 AM PST 2026	judge p2_fb_dpo_guarded p2_fb_dpo_q4merged_guarded p2_light_contrast_guarded p2_light_dpo_guarded p2_v_merged_guarded	running	fact-diff or next
+Tue Nov 10 01:01:11 AM PST 2026	rewrite-data	running	train lora_v_rewrite
+Tue Nov 10 01:01:16 AM PST 2026	train-rewrite	running	eval p2_rewrite
+Tue Nov 10 01:10:28 AM PST 2026	eval p2_rewrite	running	judge p2_rewrite
+Tue Nov 10 01:16:02 AM PST 2026	judge p2_rewrite	running	fact-diff or next
+Tue Nov 10 01:17:28 AM PST 2026	factdiff p2_rewrite	running	guard p2_rewrite
+Tue Nov 10 01:18:42 AM PST 2026	judge p2_rewrite_guarded	running	fact-diff or next
+Tue Nov 10 01:20:14 AM PST 2026	sweep	running	checkpoint eval or skip
+Tue Nov 10 01:20:22 AM PST 2026	done	done	none
