@@ -97,7 +97,7 @@ MAP += [
     # later Phase 2 runs (train2, train3, …) are added below only once RESULTS.md exists
     ("tools/sync_public.py", "tools"),
 ]
-for _run in ["train2", "train3", "train4", "train5", "train6"]:
+for _run in ["train2", "train3", "train4", "train5", "train6", "train7"]:
     if (SRC / "phase2-frankenstein" / _run / "RESULTS.md").exists():
         MAP += [(f"phase2-frankenstein/{_run}/RESULTS.md", f"reports/phase2/{_run}"),
                 (f"phase2-frankenstein/{_run}/scripts/*", f"src/phase2/{_run}")]
@@ -126,6 +126,14 @@ if (SRC / "phase2-frankenstein" / "train6" / "RESULTS.md").exists():
         ("phase2-frankenstein/train6/lora_dpo/adapter_config.json", "reports/phase2/train6/lora_dpo"),
         ("phase2-frankenstein/train6/lora_ce/train_report.json", "reports/phase2/train6/lora_ce"),
         ("phase2-frankenstein/train6/lora_ce/adapter_config.json", "reports/phase2/train6/lora_ce"),
+    ]
+# train7 extras: notes and adapter hyper-parameters (no weights)
+if (SRC / "phase2-frankenstein" / "train7" / "RESULTS.md").exists():
+    MAP += [
+        ("phase2-frankenstein/train7/data/HOW_MADE.md", "reports/phase2/train7"),
+        ("phase2-frankenstein/train7/hparams.json", "reports/phase2/train7"),
+        ("phase2-frankenstein/train7/lora_mixa/train_report.json", "reports/phase2/train7/lora_mixa"),
+        ("phase2-frankenstein/train7/lora_mixa/adapter_config.json", "reports/phase2/train7/lora_mixa"),
     ]
 if (SRC / "phase2-frankenstein" / "browser1" / "RESULTS.md").exists():
     MAP += [("phase2-frankenstein/browser1/RESULTS.md", "reports/phase2/browser1")]
