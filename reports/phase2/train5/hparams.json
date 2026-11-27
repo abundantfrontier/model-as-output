@@ -1,0 +1,34 @@
+{
+  "name": "train5 continue train4 SFT, finish epoch 1, then a second epoch",
+  "base": "Qwen/Qwen3-4B",
+  "init": "../train4/lora_sft",
+  "init_note": "final 1407-step adapter, not checkpoint-1398, not train1 voice, not train3 rewrite, not the facts LoRA",
+  "stack_facts": false,
+  "lora": {"r": 32, "alpha": 64, "dropout": 0.05},
+  "ce": {"lr": 2e-5, "log_every": 25, "save_every": 699, "reserve_min": 45},
+  "early_stop": "window-mean CE < 0.05, or jump >1.0 after mean < 0.2; roll back to last checkpoint. A deadline stop keeps the latest step.",
+  "epoch1": {
+    "pairs": "data/sft_pairs.jsonl",
+    "n_pairs": 2109,
+    "n_examples": 2097,
+    "order": "python random.seed(0) then shuffle, the same order as train4",
+    "resume_steps": 1407,
+    "remainder_steps": 690
+  },
+  "epoch2": {
+    "pairs": "data/sft_pairs_epoch2.jsonl",
+    "n_rows": 3026,
+    "extra_copies": 917,
+    "dropped": 0,
+    "rule": "weight 3 clean first-person creature reader_pos 15-21 (383 pairs); weight 2 Victor reader_pos 12/18/19 (151 pairs); weight 1 everyone else, including 3 third-person-narration pairs and 18 creature rows in Victor's creator voice"
+  },
+  "generate": {
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_new_tokens": 200,
+    "seed": 1,
+    "eos_token_id": [151645, 151643],
+    "repetition_penalty": "off for smoke, headline eval, and the merged generation_config",
+    "no_repeat_ngram_size": "off"
+  }
+}

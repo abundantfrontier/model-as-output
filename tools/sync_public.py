@@ -97,7 +97,7 @@ MAP += [
     # later Phase 2 runs (train2, train3, …) are added below only once RESULTS.md exists
     ("tools/sync_public.py", "tools"),
 ]
-for _run in ["train2", "train3", "train4"]:
+for _run in ["train2", "train3", "train4", "train5"]:
     if (SRC / "phase2-frankenstein" / _run / "RESULTS.md").exists():
         MAP += [(f"phase2-frankenstein/{_run}/RESULTS.md", f"reports/phase2/{_run}"),
                 (f"phase2-frankenstein/{_run}/scripts/*", f"src/phase2/{_run}")]
@@ -108,6 +108,14 @@ if (SRC / "phase2-frankenstein" / "train4" / "RESULTS.md").exists():
         ("phase2-frankenstein/train4/hparams.json", "reports/phase2/train4"),
         ("phase2-frankenstein/train4/lora_sft/train_report.json", "reports/phase2/train4/lora_sft"),
         ("phase2-frankenstein/train4/lora_sft/adapter_config.json", "reports/phase2/train4/lora_sft"),
+    ]
+# train5 extras: notes and adapter hyper-parameters (no weights)
+if (SRC / "phase2-frankenstein" / "train5" / "RESULTS.md").exists():
+    MAP += [
+        ("phase2-frankenstein/train5/data/HOW_MADE.md", "reports/phase2/train5"),
+        ("phase2-frankenstein/train5/hparams.json", "reports/phase2/train5"),
+        ("phase2-frankenstein/train5/lora_sft/train_report.json", "reports/phase2/train5/lora_sft"),
+        ("phase2-frankenstein/train5/lora_sft/adapter_config.json", "reports/phase2/train5/lora_sft"),
     ]
 # explicit files allowed even though a parent folder name is normally blocked
 ALLOW_PATHS = {"browser-demo/work/mlc-config.json"}
