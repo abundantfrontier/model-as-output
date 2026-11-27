@@ -1,0 +1,33 @@
+{
+  "name": "train6 small DPO on new chapter-lock refusals",
+  "base": "Qwen/Qwen3-4B",
+  "init": "../train5/lora_sft/checkpoint-2097",
+  "init_note": "first-epoch adapter (step 2097). Not the epoch-2 final lora_sft, not merged_sft, not train1 voice, not train3 rewrite, not the facts LoRA",
+  "stack_facts": false,
+  "lora": {"r": 32, "alpha": 64, "dropout": 0.0},
+  "dpo": {
+    "lr": 1e-5,
+    "beta": 0.1,
+    "epochs": 1,
+    "log_every": 10,
+    "save_every": 100,
+    "reserve_min": 45,
+    "recipe": "frozen reference, sum token logprob, beta on the sum, ref cached from the init adapter"
+  },
+  "pairs": "data/dpo.jsonl",
+  "n_rows": 280,
+  "n_refusal": 120,
+  "n_known": 80,
+  "n_ce_replay": 80,
+  "holdout": "HOLDOUT OK, 280 rows, 0 hits",
+  "early_stop": "CE window guard does not apply to this DPO run. A deadline stop keeps the latest step.",
+  "generate": {
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_new_tokens": 200,
+    "seed": 1,
+    "eos_token_id": [151645, 151643],
+    "repetition_penalty": "off",
+    "no_repeat_ngram_size": "off"
+  }
+}

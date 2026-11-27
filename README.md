@@ -48,6 +48,13 @@ A fifth run, train5, finished the remaining 690 steps of that single-pass epoch,
 - The second-epoch merge fell to **97/135** and should not ship.
 - This first-epoch merge (`merged_e1`) is the single-pass browser candidate. When a second pass is available, the recommended *Frankenstein* model remains the train3 **guarded constrained rewrite** (**100/135**, qwen judge leaks **14/22**).
 
+A sixth run, train6, took a small DPO step on train5's first-epoch adapter, using new chapter-locked future-knowledge probes ([`reports/phase2/train6/RESULTS.md`](reports/phase2/train6/RESULTS.md)):
+
+- The DPO merge (`merged_dpo_rag`) cut qwen judge leaks from **17/22** to **11/22**, under the leak bar of 14/22, with leak markers **8/22**, two-judge voice **3.47**, 0 loops and 0 frame breaks. Must-answer is **98/135** (Victor **67/90**, the creature **31/45**), two under the train5 first-epoch merge and two under the bar. One answer writes Mont Salève with a grave accent; the 1818 text and `data/canonical_names.txt` spell it Salêve, and the name audit treats that as a near-name. The success bar is still missed.
+- A short CE follow-up (`merged_ce_rag`) pushed qwen judge leaks to **6/22** and must-answer down to **87/135**, so it is not kept.
+- The NF4 proxy of the DPO merge is **93/135**, qwen judge leaks **12/22**, two-judge voice **3.41**. That is above the browser1 proxy of the train5 first-epoch merge (**88/135**, qwen judge leaks **17/22**, voice **3.21**).
+- When a second pass is available, the recommended *Frankenstein* model remains the train3 **guarded constrained rewrite** (**100/135**, qwen judge leaks **14/22**).
+
 **Browser demo.** A static web page runs Wren entirely in the visitor's browser with [WebLLM](https://github.com/mlc-ai/web-llm) on WebGPU. Nothing goes to a server. The browser build is a **single pass**. It skips the rewrite and the fact guard, so it is looser than the locked model, and the quantized browser file itself has not been scored; a labeled 4-bit proxy has (see Results).
 
 ## Results
@@ -68,9 +75,9 @@ Source: [`reports/phase1/exp10/results.md`](reports/phase1/exp10/results.md) and
 
 The one missed question (M16, "What is your number?") is a known miss inherited from pass 1. The locked model beats the reference by +0.0098 on the two-judge voice average. That margin is smaller than the judge drift we observed, so the voice win is "best of the set," not decisive. Human ratings are still pending.
 
-### Phase 2: *Frankenstein* train1–train5 (unlocked turns, Victor and the creature, 3 samples)
+### Phase 2: *Frankenstein* train1–train6 (unlocked turns, Victor and the creature, 3 samples)
 
-Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md), [`reports/phase2/train2/RESULTS.md`](reports/phase2/train2/RESULTS.md), [`reports/phase2/train3/RESULTS.md`](reports/phase2/train3/RESULTS.md), [`reports/phase2/train4/RESULTS.md`](reports/phase2/train4/RESULTS.md) and [`reports/phase2/train5/RESULTS.md`](reports/phase2/train5/RESULTS.md). Train1 and train2 voice scores are from the `qwen3:14b` judge only. Train3, train4 and train5 voice are the two-judge average of `qwen3:14b` and `gemma3:12b`.
+Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md), [`reports/phase2/train2/RESULTS.md`](reports/phase2/train2/RESULTS.md), [`reports/phase2/train3/RESULTS.md`](reports/phase2/train3/RESULTS.md), [`reports/phase2/train4/RESULTS.md`](reports/phase2/train4/RESULTS.md), [`reports/phase2/train5/RESULTS.md`](reports/phase2/train5/RESULTS.md) and [`reports/phase2/train6/RESULTS.md`](reports/phase2/train6/RESULTS.md). Train1 and train2 voice scores are from the `qwen3:14b` judge only. Train3, train4, train5 and train6 voice are the two-judge average of `qwen3:14b` and `gemma3:12b`.
 
 | run | condition | story questions answered | leak probes failed (marker) | voice (1–5) | token loops |
 |---|---|---|---|---|---|
@@ -89,8 +96,11 @@ Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md),
 | train5 | `merged_e1_rag`: finished first-epoch merge + retrieval (single-pass browser candidate; penalty off) | **100/135** | 11/22 | **3.31** (two-judge) | 0 |
 | train5 | `merged_sft_rag`: second-epoch upweight merge + retrieval (single pass; not shipped) | 97/135 | 11/22 | 3.24 (two-judge) | 0 |
 | browser1 | proxy spot-check of the packed train5 first-epoch merge (bitsandbytes 4-bit stand-in for the MLC q4f16_1 pack; not scored in a browser; see [`reports/phase2/browser1/RESULTS.md`](reports/phase2/browser1/RESULTS.md)) | 88/135 | 8/22 | 3.21 (two-judge) | 0 |
+| train6 | `merged_dpo_rag`: DPO merge on train5's first-epoch adapter + retrieval (single-pass leak attempt; penalty off) | **98/135** | **8/22** | **3.47** (two-judge) | 0 |
+| train6 | `merged_dpo_bnb4_proxy`: bitsandbytes NF4 proxy of that DPO merge (stand-in for a 4-bit pack; not scored in a browser) | 93/135 | 8/22 | 3.41 (two-judge) | 0 |
+| train6 | `merged_ce_rag`: CE follow-up merge + retrieval (single pass; not kept) | 87/135 | 2/22 | 3.79 (two-judge) | 0 |
 
-The train1 looping models score 0 leaks only because they say almost nothing. Train2 cut leaks a little (7/22 markers for the two-pass rows) and raised voice, but lost story answers. Train3's guarded constrained rewrite meets the bar: **100/135** against **99/135** for retrieval only, two-judge voice **3.33** (qwen3:14b 3.03, gemma3:12b 3.64) against the baseline 2.89, 0 loops and 0 frame breaks. On the original train1 judge alone (qwen3:14b), guarded voice is 3.03, still above 2.89. The train3 merged single-pass model (62/135) should not ship. Train4's merge ties retrieval at **99/135**, one short of the guarded bar, with two-judge voice **3.23** (qwen3:14b 2.83, gemma3:12b 3.62), leak markers 10/22, qwen judge leaks 17/22, 0 loops and 0 frame breaks, and no invented names. Train5's finished first-epoch merge (`merged_e1_rag`) reaches **100/135** (Victor 68/90, the creature 32/45), with two-judge voice **3.31** (qwen3:14b 2.99, gemma3:12b 3.64), leak markers 11/22, qwen judge leaks 17/22, 0 invented names, 0 loops and 0 frame breaks. That merge is the single-pass browser candidate. The second-epoch merge (97/135, leak markers 11/22, qwen judge leaks 18/22, two-judge voice 3.24) should not ship. The success bar is still missed on leaks: only the guarded two-pass run holds qwen judge leaks at 14/22.
+The train1 looping models score 0 leaks only because they say almost nothing. Train2 cut leaks a little (7/22 markers for the two-pass rows) and raised voice, but lost story answers. Train3's guarded constrained rewrite meets the bar: **100/135** against **99/135** for retrieval only, two-judge voice **3.33** (qwen3:14b 3.03, gemma3:12b 3.64) against the baseline 2.89, 0 loops and 0 frame breaks. On the original train1 judge alone (qwen3:14b), guarded voice is 3.03, still above 2.89. The train3 merged single-pass model (62/135) should not ship. Train4's merge ties retrieval at **99/135**, one short of the guarded bar, with two-judge voice **3.23** (qwen3:14b 2.83, gemma3:12b 3.62), leak markers 10/22, qwen judge leaks 17/22, 0 loops and 0 frame breaks, and no invented names. Train5's finished first-epoch merge (`merged_e1_rag`) reaches **100/135** (Victor 68/90, the creature 32/45), with two-judge voice **3.31** (qwen3:14b 2.99, gemma3:12b 3.64), leak markers 11/22, qwen judge leaks 17/22, 0 invented names, 0 loops and 0 frame breaks. That merge is the single-pass browser candidate. The second-epoch merge (97/135, leak markers 11/22, qwen judge leaks 18/22, two-judge voice 3.24) should not ship. The success bar is still missed on leaks: only the guarded two-pass run holds qwen judge leaks at 14/22. Train6's DPO merge (`merged_dpo_rag`) cuts qwen judge leaks to **11/22**, with leak markers **8/22**, two-judge voice **3.47** (qwen3:14b 3.11, gemma3:12b 3.83), 0 loops and 0 frame breaks, but must-answer falls to **98/135** (Victor 67/90, the creature 31/45). The name audit is 1/201: one answer writes Mont Salève with a grave accent, while the 1818 text spells it Salêve. A short CE follow-up (`merged_ce_rag`) reaches qwen judge leaks **6/22** and must-answer **87/135**, so it is not kept. The NF4 proxy of the DPO merge is **93/135**, qwen judge leaks **12/22**, two-judge voice **3.41** (qwen3:14b 3.07, gemma3:12b 3.74), above the browser1 proxy of the train5 first-epoch merge (88/135, qwen judge leaks 17/22, voice 3.21). The success bar is still missed: must-answer is 98/135, under 100, and there is one accent near-name. Guarded two-pass remains the only run at 100/135 with qwen judge leaks at 14/22.
 
 ## How it works
 
@@ -146,7 +156,7 @@ python scripts/prepare.py       # CPU only: split into 28 units, build the chapt
 python scripts/test_lock.py     # CPU only: structure, lock, questions, voice data
 mkdir -p train1 && cp -r ../../src/phase2/train1 train1/scripts
 bash train1/scripts/run.sh      # GPU: data expansion, LoRAs, two-pass eval, scorecard
-# train2 (the rewrite retrain), train3 (the constrained rewrite), train4 (the single-pass distill) and train5 (finishing that distill, then a second epoch that should not ship) have their scripts in src/phase2/train2/, src/phase2/train3/, src/phase2/train4/ and src/phase2/train5/, set up the same way
+# train2 (the rewrite retrain), train3 (the constrained rewrite), train4 (the single-pass distill), train5 (finishing that distill, then a second epoch that should not ship) and train6 (a small DPO leak pass on the train5 first-epoch adapter) have their scripts in src/phase2/train2/ through src/phase2/train6/, set up the same way
 ```
 
 Questions, leak probes, the knowledge state and the hand-written voice seeds are in [`data/frankenstein/`](data/frankenstein/).
@@ -177,7 +187,7 @@ docs/                papers, the No Return story, the Wren model card and demo i
   phase2-frankenstein/  Phase 2 data notes
 src/
   phase1/exp4..exp10 the scripts behind the locked No Return model
-  phase2/            Frankenstein: prep (text split, index, lock tests), train1, dev1, train2, train3, train4
+  phase2/            Frankenstein: prep (text split, index, lock tests), train1, dev1, train2, train3, train4, train5, train6
   reader/            a small local reader app (chat with citations, chapter lock)
   browser-demo/      the static WebLLM/WebGPU demo page and its build scripts
 configs/             hyper-parameters and adapter configs (no weights)
@@ -198,7 +208,7 @@ tools/               sync_public.py, which rebuilds this repo from the working t
 - Scores come from small held-out sets (60 Phase 1 questions, 135 Phase 2 samples), automatic judges (local `qwen3:14b` and `gemma3:12b`) and regex rubrics. Judge drift is about the same size as some of the differences we report.
 - Human voice ratings are not in yet.
 - The browser build is single-pass. Its only post-quantization score is a proxy (57/60 must-answer, 2/48 leaks, 7 frame breaks), which misses the Phase 1 bar. It can say things the story never said, or lean later than the chapter you picked.
-- Phase 2's guarded two-pass rewrite still leads on leaks (8/22 markers, 14/22 qwen judge leaks) and ties the train5 first-epoch merge on story questions (**100/135**, against **99/135** for retrieval and for the train4 single-pass merge). The train3 merged single-pass model (62/135) and the train5 second-epoch merge (97/135) should not ship. The train5 first-epoch merge (100/135, 11/22 leak markers, 17/22 qwen judge leaks, two-judge voice 3.31, 0 invented names, 0 loops, 0 frame breaks) is the single-pass browser candidate and keeps canonical names. Spoiler leaks on *Frankenstein* are still well above the Phase 1 level.
+- Phase 2's guarded two-pass rewrite is still the only run that holds **100/135** story questions with qwen judge leaks at **14/22** (leak markers 8/22). The train5 first-epoch merge also answers **100/135** (11/22 leak markers, 17/22 qwen judge leaks, two-judge voice 3.31, 0 invented names, 0 loops, 0 frame breaks) and is the single-pass browser candidate. Train6's DPO merge cuts qwen judge leaks to **11/22** (leak markers 8/22, two-judge voice 3.47, 0 loops, 0 frame breaks) but must-answer is **98/135**, and the name audit flags one Salève accent near-name, so the bar is still missed. Its NF4 proxy is 93/135 and 12/22. The train3 merged single-pass model (62/135), the train5 second-epoch merge (97/135) and the train6 CE follow-up (87/135, qwen judge leaks 6/22) should not ship. Spoiler leaks on *Frankenstein* are still well above the Phase 1 level.
 - This is research code, written to run on one machine. Expect to adjust paths.
 
 ## License
