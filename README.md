@@ -96,6 +96,7 @@ Sources: [`reports/phase2/train1/RESULTS.md`](reports/phase2/train1/RESULTS.md),
 | train5 | `merged_e1_rag`: finished first-epoch merge + retrieval (single-pass browser candidate; penalty off) | **100/135** | 11/22 | **3.31** (two-judge) | 0 |
 | train5 | `merged_sft_rag`: second-epoch upweight merge + retrieval (single pass; not shipped) | 97/135 | 11/22 | 3.24 (two-judge) | 0 |
 | browser1 | proxy spot-check of the packed train5 first-epoch merge (bitsandbytes 4-bit stand-in for the MLC q4f16_1 pack; not scored in a browser; see [`reports/phase2/browser1/RESULTS.md`](reports/phase2/browser1/RESULTS.md)) | 88/135 | 8/22 | 3.21 (two-judge) | 0 |
+| browser2 | MLC q4f16_1 WebLLM pack of the train6 DPO merge plus BM25 index and lock selftest (packed only; not scored in a browser, not uploaded; numbers are the train6 NF4 proxy; see [`reports/phase2/browser2/RESULTS.md`](reports/phase2/browser2/RESULTS.md)) | 93/135 | 8/22 | 3.41 (two-judge) | 0 |
 | train6 | `merged_dpo_rag`: DPO merge on train5's first-epoch adapter + retrieval (single-pass leak attempt; penalty off) | **98/135** | **8/22** | **3.47** (two-judge) | 0 |
 | train6 | `merged_dpo_bnb4_proxy`: bitsandbytes NF4 proxy of that DPO merge (stand-in for a 4-bit pack; not scored in a browser) | 93/135 | 8/22 | 3.41 (two-judge) | 0 |
 | train6 | `merged_ce_rag`: CE follow-up merge + retrieval (single pass; not kept) | 87/135 | 2/22 | 3.79 (two-judge) | 0 |

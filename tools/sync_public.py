@@ -129,6 +129,8 @@ if (SRC / "phase2-frankenstein" / "train6" / "RESULTS.md").exists():
     ]
 if (SRC / "phase2-frankenstein" / "browser1" / "RESULTS.md").exists():
     MAP += [("phase2-frankenstein/browser1/RESULTS.md", "reports/phase2/browser1")]
+if (SRC / "phase2-frankenstein" / "browser2" / "RESULTS.md").exists():
+    MAP += [("phase2-frankenstein/browser2/RESULTS.md", "reports/phase2/browser2")]
 # explicit files allowed even though a parent folder name is normally blocked
 ALLOW_PATHS = {"browser-demo/work/mlc-config.json"}
 
