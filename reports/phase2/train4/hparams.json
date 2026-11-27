@@ -1,0 +1,28 @@
+{
+  "name": "train4 single-pass distill of train3 guarded outputs",
+  "base": "Qwen/Qwen3-4B",
+  "init": "stock (not train1 lora_voice, not train2, not train3 rewrite adapter)",
+  "teacher": "../train3/lora_v_rewrite",
+  "stack_facts": false,
+  "lora": {"r": 32, "alpha": 64, "dropout": 0.05},
+  "ce": {"epochs": 1, "lr": 2e-5, "log_every": 25, "save_every": "n/3"},
+  "early_stop": "window-mean CE < 0.05, or jump >1.0 after mean < 0.2; roll back to last checkpoint",
+  "pairs": "data/sft_pairs.jsonl",
+  "n_pairs_kept": 2109,
+  "n_examples_trained": 2097,
+  "n_accepted_rewrite": 897,
+  "n_pass1_fallback": 1212,
+  "prefix_mismatch_skipped": 12,
+  "input": "character card + chapter-locked bge RAG + question (same as merged eval)",
+  "target": "guarded final answer: accepted rewrite, else name-clean pass-1",
+  "generate": {
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_new_tokens": 200,
+    "seed": 1,
+    "eos_token_id": [151645, 151643],
+    "repetition_penalty": "1.15 on the teacher pass only. Off for the shipped merge and the headline eval.",
+    "no_repeat_ngram_size": "omitted on the teacher pass and on the headline eval",
+    "note": "Smoke on the trained adapter: 0/20 loops with the penalty and 0/20 without. The penalty produced near-names (Agrappa, Morritz, Cliversal, Thoneon, Waldmann). The no-penalty pass had 0 near-names. Headline eval and merged generation_config therefore omit the penalty. It is a safety net that this checkpoint does not need. Official rag_base remains the train1 run."
+  }
+}
