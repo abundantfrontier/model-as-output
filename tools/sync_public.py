@@ -97,7 +97,7 @@ MAP += [
     # later Phase 2 runs (train2, train3, …) are added below only once RESULTS.md exists
     ("tools/sync_public.py", "tools"),
 ]
-for _run in ["train2", "train3", "train4", "train5", "train6", "train7"]:
+for _run in ["train2", "train3", "train4", "train5", "train6", "train7", "train8"]:
     if (SRC / "phase2-frankenstein" / _run / "RESULTS.md").exists():
         MAP += [(f"phase2-frankenstein/{_run}/RESULTS.md", f"reports/phase2/{_run}"),
                 (f"phase2-frankenstein/{_run}/scripts/*", f"src/phase2/{_run}")]
@@ -135,12 +135,25 @@ if (SRC / "phase2-frankenstein" / "train7" / "RESULTS.md").exists():
         ("phase2-frankenstein/train7/lora_mixa/train_report.json", "reports/phase2/train7/lora_mixa"),
         ("phase2-frankenstein/train7/lora_mixa/adapter_config.json", "reports/phase2/train7/lora_mixa"),
     ]
+# train8 extras: notes, analysis and adapter hyper-parameters (no weights)
+if (SRC / "phase2-frankenstein" / "train8" / "RESULTS.md").exists():
+    MAP += [
+        ("phase2-frankenstein/train8/data/HOW_MADE.md", "reports/phase2/train8"),
+        ("phase2-frankenstein/train8/hparams.json", "reports/phase2/train8"),
+        ("phase2-frankenstein/train8/analysis/*.md", "reports/phase2/train8/analysis"),
+        ("phase2-frankenstein/train8/lora_qa/train_report.json", "reports/phase2/train8/lora_qa"),
+        ("phase2-frankenstein/train8/lora_qa/adapter_config.json", "reports/phase2/train8/lora_qa"),
+        ("phase2-frankenstein/train8/lora_qb/average_report.json", "reports/phase2/train8/lora_qb"),
+        ("phase2-frankenstein/train8/lora_qb/adapter_config.json", "reports/phase2/train8/lora_qb"),
+    ]
 if (SRC / "phase2-frankenstein" / "browser1" / "RESULTS.md").exists():
     MAP += [("phase2-frankenstein/browser1/RESULTS.md", "reports/phase2/browser1")]
 if (SRC / "phase2-frankenstein" / "browser2" / "RESULTS.md").exists():
     MAP += [("phase2-frankenstein/browser2/RESULTS.md", "reports/phase2/browser2")]
 if (SRC / "phase2-frankenstein" / "browser3" / "RESULTS.md").exists():
     MAP += [("phase2-frankenstein/browser3/RESULTS.md", "reports/phase2/browser3")]
+if (SRC / "phase2-frankenstein" / "bscore3" / "RESULTS.md").exists():
+    MAP += [("phase2-frankenstein/bscore3/RESULTS.md", "reports/phase2/bscore3")]
 # explicit files allowed even though a parent folder name is normally blocked
 ALLOW_PATHS = {"browser-demo/work/mlc-config.json"}
 

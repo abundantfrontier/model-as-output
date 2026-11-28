@@ -1,0 +1,6 @@
+{
+  "a": "$HOME/output-model/phase2-frankenstein/train7/lora_mixa",
+  "b": "$HOME/output-model/phase2-frankenstein/train8/lora_qa",
+  "w_on_b": 0.5,
+  "n_tensors": 504
+}
